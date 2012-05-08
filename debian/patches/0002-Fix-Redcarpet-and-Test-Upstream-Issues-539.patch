@@ -1,0 +1,35 @@
+From: Youhei SASAKI <uwabami@gfd-dennou.org>
+Date: Fri, 11 May 2012 18:07:58 +0900
+Subject: Fix Redcarpet and Test(Upstream Issues #539)
+
+---
+ lib/jekyll/converters/markdown.rb |    2 +-
+ test/test_redcarpet.rb            |    2 +-
+ 2 files changed, 2 insertions(+), 2 deletions(-)
+
+diff --git a/lib/jekyll/converters/markdown.rb b/lib/jekyll/converters/markdown.rb
+index b565547..c0e4836 100644
+--- a/lib/jekyll/converters/markdown.rb
++++ b/lib/jekyll/converters/markdown.rb
+@@ -88,7 +88,7 @@ module Jekyll
+       setup
+       case @config['markdown']
+         when 'redcarpet'
+-          Redcarpet.new(content, *@redcarpet_extensions).to_html
++          RedcarpetCompat.new(content, *@redcarpet_extensions).to_html
+         when 'kramdown'
+           # Check for use of coderay
+           if @config['kramdown']['use_coderay']
+diff --git a/test/test_redcarpet.rb b/test/test_redcarpet.rb
+index 1359c44..f6255c6 100644
+--- a/test/test_redcarpet.rb
++++ b/test/test_redcarpet.rb
+@@ -15,7 +15,7 @@ class TestRedcarpet < Test::Unit::TestCase
+     end
+     
+     should "pass redcarpet extensions" do
+-      assert_equal "<p>&ldquo;smart&rdquo;</p>", @markdown.convert('"smart"').strip
++      assert_equal "<p>&quot;smart&quot;</p>", @markdown.convert('"smart"').strip
+     end
+   end
+ end

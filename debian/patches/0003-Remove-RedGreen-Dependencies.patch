@@ -1,0 +1,22 @@
+From: Youhei SASAKI <uwabami@gfd-dennou.org>
+Date: Fri, 11 May 2012 18:14:20 +0900
+Subject: Remove RedGreen Dependencies
+
+Signed-off-by: Youhei SASAKI <uwabami@gfd-dennou.org>
+---
+ test/helper.rb |    2 --
+ 1 file changed, 2 deletions(-)
+
+diff --git a/test/helper.rb b/test/helper.rb
+index f0ee4a6..464d127 100644
+--- a/test/helper.rb
++++ b/test/helper.rb
+@@ -3,8 +3,6 @@ require 'redcloth'
+ require 'rdiscount'
+ require 'kramdown'
+ require 'redcarpet'
+-
+-require 'redgreen' if RUBY_VERSION < '1.9'
+ require 'shoulda'
+ require 'rr'
+ 

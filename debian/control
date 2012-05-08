@@ -1,0 +1,45 @@
+Source: ruby-jekyll
+Section: ruby
+Priority: optional
+Maintainer: Debian Ruby Extras Maintainers <pkg-ruby-extras-maintainers@lists.alioth.debian.org>
+Uploaders: Youhei SASAKI <uwabami@gfd-dennou.org>
+DM-Upload-Allowed: yes
+Build-Depends: debhelper (>= 7.0.50~), gem2deb (>= 0.2.13~), rake,
+ ruby-liquid,
+ ruby-rdiscount,
+ ruby-maruku,
+ ruby-kramdown,
+ ruby-shoulda,
+ cucumber,
+ ruby-rr,
+ ruby-redcloth,
+ ruby-classifier,
+ ruby-albino,
+ ruby-redcarpet
+Standards-Version: 3.9.3
+Vcs-Git: git://git.debian.org/pkg-ruby-extras/ruby-jekyll.git
+Vcs-Browser: http://git.debian.org/?p=pkg-ruby-extras/ruby-jekyll.git;a=summary
+Homepage: http://github.com/mojombo/jekyll
+XS-Ruby-Versions: all
+
+Package: ruby-jekyll
+Architecture: all
+XB-Ruby-Versions: ${ruby:Versions}
+Depends: ${shlibs:Depends}, ${misc:Depends}, ruby | ruby-interpreter,
+ ruby-liquid,
+ ruby-maruku,
+ ruby-albino,
+ ruby-kramdown,
+ ruby-classifier,
+ ruby-directory-watcher
+Recommends: ruby-sequel, ruby-sequel-pg, ruby-mysql
+Description: Simple, blog aware, static site generator
+ Jekyll is a simple, blog aware, static site generator. It takes a
+ template directory (representing the raw form of a website), runs it
+ through Textile or Markdown and Liquid converters, and spits out a
+ complete, static website suitable for serving with Apache or your
+ favorite web server.
+ .
+ This is also the engine behind GitHub Pages(http://pages.github.com),
+ which you can use to host your project's page or blog right here from
+ GitHub.
