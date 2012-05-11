@@ -1,4 +1,4 @@
-Source: ruby-jekyll
+Source: jekyll
 Section: ruby
 Priority: optional
 Maintainer: Debian Ruby Extras Maintainers <pkg-ruby-extras-maintainers@lists.alioth.debian.org>
@@ -22,7 +22,7 @@ Vcs-Browser: http://git.debian.org/?p=pkg-ruby-extras/jekyll.git;a=summary
 Homepage: http://github.com/mojombo/jekyll
 XS-Ruby-Versions: all
 
-Package: ruby-jekyll
+Package: jekyll
 Architecture: all
 XB-Ruby-Versions: ${ruby:Versions}
 Depends: ${shlibs:Depends}, ${misc:Depends}, ruby | ruby-interpreter,
@@ -32,7 +32,7 @@ Depends: ${shlibs:Depends}, ${misc:Depends}, ruby | ruby-interpreter,
  ruby-kramdown,
  ruby-classifier,
  ruby-directory-watcher
-Recommends: ruby-sequel, ruby-sequel-pg, ruby-mysql, cucumber
+Recommends: ruby-sequel, ruby-sequel-pg, ruby-mysql
 Description: Simple, blog aware, static site generator
  Jekyll is a simple, blog aware, static site generator. It takes a
  template directory (representing the raw form of a website), runs it
