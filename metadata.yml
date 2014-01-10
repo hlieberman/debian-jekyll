@@ -1,312 +1,559 @@
---- !ruby/object:Gem::Specification 
+--- !ruby/object:Gem::Specification
 name: jekyll
-version: !ruby/object:Gem::Version 
-  hash: 55
-  prerelease: 
-  segments: 
-  - 0
-  - 11
-  - 2
-  version: 0.11.2
+version: !ruby/object:Gem::Version
+  version: 1.4.2
 platform: ruby
-authors: 
+authors:
 - Tom Preston-Werner
 autorequire: 
 bindir: bin
 cert_chain: []
-
-date: 2011-12-27 00:00:00 -07:00
-default_executable: 
-dependencies: 
-- !ruby/object:Gem::Dependency 
-  prerelease: false
-  requirement: &id001 !ruby/object:Gem::Requirement 
-    none: false
-    requirements: 
-    - - ~>
-      - !ruby/object:Gem::Version 
-        hash: 5
-        segments: 
-        - 2
-        - 3
-        version: "2.3"
-  type: :runtime
+date: 2013-12-16 00:00:00.000000000 Z
+dependencies:
+- !ruby/object:Gem::Dependency
   name: liquid
-  version_requirements: *id001
-- !ruby/object:Gem::Dependency 
-  prerelease: false
-  requirement: &id002 !ruby/object:Gem::Requirement 
-    none: false
-    requirements: 
+  requirement: !ruby/object:Gem::Requirement
+    requirements:
     - - ~>
-      - !ruby/object:Gem::Version 
-        hash: 9
-        segments: 
-        - 1
-        - 3
-        version: "1.3"
+      - !ruby/object:Gem::Version
+        version: 2.5.2
   type: :runtime
+  prerelease: false
+  version_requirements: !ruby/object:Gem::Requirement
+    requirements:
+    - - ~>
+      - !ruby/object:Gem::Version
+        version: 2.5.2
+- !ruby/object:Gem::Dependency
   name: classifier
-  version_requirements: *id002
-- !ruby/object:Gem::Dependency 
-  prerelease: false
-  requirement: &id003 !ruby/object:Gem::Requirement 
-    none: false
-    requirements: 
+  requirement: !ruby/object:Gem::Requirement
+    requirements:
     - - ~>
-      - !ruby/object:Gem::Version 
-        hash: 13
-        segments: 
-        - 1
-        - 1
-        version: "1.1"
+      - !ruby/object:Gem::Version
+        version: '1.3'
   type: :runtime
-  name: directory_watcher
-  version_requirements: *id003
-- !ruby/object:Gem::Dependency 
   prerelease: false
-  requirement: &id004 !ruby/object:Gem::Requirement 
-    none: false
-    requirements: 
+  version_requirements: !ruby/object:Gem::Requirement
+    requirements:
     - - ~>
-      - !ruby/object:Gem::Version 
-        hash: 1
-        segments: 
-        - 0
-        - 5
-        version: "0.5"
+      - !ruby/object:Gem::Version
+        version: '1.3'
+- !ruby/object:Gem::Dependency
+  name: listen
+  requirement: !ruby/object:Gem::Requirement
+    requirements:
+    - - ~>
+      - !ruby/object:Gem::Version
+        version: '1.3'
   type: :runtime
+  prerelease: false
+  version_requirements: !ruby/object:Gem::Requirement
+    requirements:
+    - - ~>
+      - !ruby/object:Gem::Version
+        version: '1.3'
+- !ruby/object:Gem::Dependency
   name: maruku
-  version_requirements: *id004
-- !ruby/object:Gem::Dependency 
-  prerelease: false
-  requirement: &id005 !ruby/object:Gem::Requirement 
-    none: false
-    requirements: 
+  requirement: !ruby/object:Gem::Requirement
+    requirements:
     - - ~>
-      - !ruby/object:Gem::Version 
-        hash: 17
-        segments: 
-        - 0
-        - 13
-        version: "0.13"
+      - !ruby/object:Gem::Version
+        version: 0.7.0
   type: :runtime
-  name: kramdown
-  version_requirements: *id005
-- !ruby/object:Gem::Dependency 
   prerelease: false
-  requirement: &id006 !ruby/object:Gem::Requirement 
-    none: false
-    requirements: 
+  version_requirements: !ruby/object:Gem::Requirement
+    requirements:
     - - ~>
-      - !ruby/object:Gem::Version 
-        hash: 9
-        segments: 
-        - 1
-        - 3
-        version: "1.3"
+      - !ruby/object:Gem::Version
+        version: 0.7.0
+- !ruby/object:Gem::Dependency
+  name: pygments.rb
+  requirement: !ruby/object:Gem::Requirement
+    requirements:
+    - - ~>
+      - !ruby/object:Gem::Version
+        version: 0.5.0
   type: :runtime
-  name: albino
-  version_requirements: *id006
-- !ruby/object:Gem::Dependency 
   prerelease: false
-  requirement: &id007 !ruby/object:Gem::Requirement 
-    none: false
-    requirements: 
+  version_requirements: !ruby/object:Gem::Requirement
+    requirements:
     - - ~>
-      - !ruby/object:Gem::Version 
-        hash: 25
-        segments: 
-        - 0
-        - 9
-        version: "0.9"
-  type: :development
-  name: rake
-  version_requirements: *id007
-- !ruby/object:Gem::Dependency 
-  prerelease: false
-  requirement: &id008 !ruby/object:Gem::Requirement 
-    none: false
-    requirements: 
+      - !ruby/object:Gem::Version
+        version: 0.5.0
+- !ruby/object:Gem::Dependency
+  name: commander
+  requirement: !ruby/object:Gem::Requirement
+    requirements:
     - - ~>
-      - !ruby/object:Gem::Version 
-        hash: 17
-        segments: 
-        - 3
-        - 11
-        version: "3.11"
-  type: :development
-  name: rdoc
-  version_requirements: *id008
-- !ruby/object:Gem::Dependency 
+      - !ruby/object:Gem::Version
+        version: 4.1.3
+  type: :runtime
   prerelease: false
-  requirement: &id009 !ruby/object:Gem::Requirement 
-    none: false
-    requirements: 
+  version_requirements: !ruby/object:Gem::Requirement
+    requirements:
     - - ~>
-      - !ruby/object:Gem::Version 
-        hash: 11
-        segments: 
-        - 1
-        - 2
-        version: "1.2"
-  type: :development
-  name: redgreen
-  version_requirements: *id009
-- !ruby/object:Gem::Dependency 
-  prerelease: false
-  requirement: &id010 !ruby/object:Gem::Requirement 
-    none: false
-    requirements: 
+      - !ruby/object:Gem::Version
+        version: 4.1.3
+- !ruby/object:Gem::Dependency
+  name: safe_yaml
+  requirement: !ruby/object:Gem::Requirement
+    requirements:
     - - ~>
-      - !ruby/object:Gem::Version 
-        hash: 21
-        segments: 
-        - 2
-        - 11
-        version: "2.11"
-  type: :development
-  name: shoulda
-  version_requirements: *id010
-- !ruby/object:Gem::Dependency 
+      - !ruby/object:Gem::Version
+        version: 0.9.7
+  type: :runtime
   prerelease: false
-  requirement: &id011 !ruby/object:Gem::Requirement 
-    none: false
-    requirements: 
+  version_requirements: !ruby/object:Gem::Requirement
+    requirements:
     - - ~>
-      - !ruby/object:Gem::Version 
-        hash: 15
-        segments: 
-        - 1
-        - 0
-        version: "1.0"
-  type: :development
-  name: rr
-  version_requirements: *id011
-- !ruby/object:Gem::Dependency 
-  prerelease: false
-  requirement: &id012 !ruby/object:Gem::Requirement 
-    none: false
-    requirements: 
-    - - "="
-      - !ruby/object:Gem::Version 
-        hash: 13
-        segments: 
-        - 1
-        - 1
-        version: "1.1"
-  type: :development
-  name: cucumber
-  version_requirements: *id012
-- !ruby/object:Gem::Dependency 
-  prerelease: false
-  requirement: &id013 !ruby/object:Gem::Requirement 
-    none: false
-    requirements: 
+      - !ruby/object:Gem::Version
+        version: 0.9.7
+- !ruby/object:Gem::Dependency
+  name: colorator
+  requirement: !ruby/object:Gem::Requirement
+    requirements:
     - - ~>
-      - !ruby/object:Gem::Version 
-        hash: 31
-        segments: 
-        - 4
-        - 2
-        version: "4.2"
-  type: :development
-  name: RedCloth
-  version_requirements: *id013
-- !ruby/object:Gem::Dependency 
+      - !ruby/object:Gem::Version
+        version: '0.1'
+  type: :runtime
   prerelease: false
-  requirement: &id014 !ruby/object:Gem::Requirement 
-    none: false
-    requirements: 
+  version_requirements: !ruby/object:Gem::Requirement
+    requirements:
     - - ~>
-      - !ruby/object:Gem::Version 
-        hash: 3
-        segments: 
-        - 1
-        - 6
-        version: "1.6"
-  type: :development
-  name: rdiscount
-  version_requirements: *id014
-- !ruby/object:Gem::Dependency 
-  prerelease: false
-  requirement: &id015 !ruby/object:Gem::Requirement 
-    none: false
-    requirements: 
-    - - ~>
-      - !ruby/object:Gem::Version 
-        hash: 29
-        segments: 
-        - 1
-        - 9
-        version: "1.9"
-  type: :development
+      - !ruby/object:Gem::Version
+        version: '0.1'
+- !ruby/object:Gem::Dependency
   name: redcarpet
-  version_requirements: *id015
+  requirement: !ruby/object:Gem::Requirement
+    requirements:
+    - - ~>
+      - !ruby/object:Gem::Version
+        version: 2.3.0
+  type: :runtime
+  prerelease: false
+  version_requirements: !ruby/object:Gem::Requirement
+    requirements:
+    - - ~>
+      - !ruby/object:Gem::Version
+        version: 2.3.0
+- !ruby/object:Gem::Dependency
+  name: toml
+  requirement: !ruby/object:Gem::Requirement
+    requirements:
+    - - ~>
+      - !ruby/object:Gem::Version
+        version: 0.1.0
+  type: :runtime
+  prerelease: false
+  version_requirements: !ruby/object:Gem::Requirement
+    requirements:
+    - - ~>
+      - !ruby/object:Gem::Version
+        version: 0.1.0
+- !ruby/object:Gem::Dependency
+  name: rake
+  requirement: !ruby/object:Gem::Requirement
+    requirements:
+    - - ~>
+      - !ruby/object:Gem::Version
+        version: '10.1'
+  type: :development
+  prerelease: false
+  version_requirements: !ruby/object:Gem::Requirement
+    requirements:
+    - - ~>
+      - !ruby/object:Gem::Version
+        version: '10.1'
+- !ruby/object:Gem::Dependency
+  name: rdoc
+  requirement: !ruby/object:Gem::Requirement
+    requirements:
+    - - ~>
+      - !ruby/object:Gem::Version
+        version: '3.11'
+  type: :development
+  prerelease: false
+  version_requirements: !ruby/object:Gem::Requirement
+    requirements:
+    - - ~>
+      - !ruby/object:Gem::Version
+        version: '3.11'
+- !ruby/object:Gem::Dependency
+  name: redgreen
+  requirement: !ruby/object:Gem::Requirement
+    requirements:
+    - - ~>
+      - !ruby/object:Gem::Version
+        version: '1.2'
+  type: :development
+  prerelease: false
+  version_requirements: !ruby/object:Gem::Requirement
+    requirements:
+    - - ~>
+      - !ruby/object:Gem::Version
+        version: '1.2'
+- !ruby/object:Gem::Dependency
+  name: shoulda
+  requirement: !ruby/object:Gem::Requirement
+    requirements:
+    - - ~>
+      - !ruby/object:Gem::Version
+        version: 3.3.2
+  type: :development
+  prerelease: false
+  version_requirements: !ruby/object:Gem::Requirement
+    requirements:
+    - - ~>
+      - !ruby/object:Gem::Version
+        version: 3.3.2
+- !ruby/object:Gem::Dependency
+  name: rr
+  requirement: !ruby/object:Gem::Requirement
+    requirements:
+    - - ~>
+      - !ruby/object:Gem::Version
+        version: '1.1'
+  type: :development
+  prerelease: false
+  version_requirements: !ruby/object:Gem::Requirement
+    requirements:
+    - - ~>
+      - !ruby/object:Gem::Version
+        version: '1.1'
+- !ruby/object:Gem::Dependency
+  name: cucumber
+  requirement: !ruby/object:Gem::Requirement
+    requirements:
+    - - ~>
+      - !ruby/object:Gem::Version
+        version: '1.3'
+  type: :development
+  prerelease: false
+  version_requirements: !ruby/object:Gem::Requirement
+    requirements:
+    - - ~>
+      - !ruby/object:Gem::Version
+        version: '1.3'
+- !ruby/object:Gem::Dependency
+  name: RedCloth
+  requirement: !ruby/object:Gem::Requirement
+    requirements:
+    - - ~>
+      - !ruby/object:Gem::Version
+        version: '4.2'
+  type: :development
+  prerelease: false
+  version_requirements: !ruby/object:Gem::Requirement
+    requirements:
+    - - ~>
+      - !ruby/object:Gem::Version
+        version: '4.2'
+- !ruby/object:Gem::Dependency
+  name: kramdown
+  requirement: !ruby/object:Gem::Requirement
+    requirements:
+    - - ~>
+      - !ruby/object:Gem::Version
+        version: '1.2'
+  type: :development
+  prerelease: false
+  version_requirements: !ruby/object:Gem::Requirement
+    requirements:
+    - - ~>
+      - !ruby/object:Gem::Version
+        version: '1.2'
+- !ruby/object:Gem::Dependency
+  name: rdiscount
+  requirement: !ruby/object:Gem::Requirement
+    requirements:
+    - - ~>
+      - !ruby/object:Gem::Version
+        version: '1.6'
+  type: :development
+  prerelease: false
+  version_requirements: !ruby/object:Gem::Requirement
+    requirements:
+    - - ~>
+      - !ruby/object:Gem::Version
+        version: '1.6'
+- !ruby/object:Gem::Dependency
+  name: launchy
+  requirement: !ruby/object:Gem::Requirement
+    requirements:
+    - - ~>
+      - !ruby/object:Gem::Version
+        version: '2.3'
+  type: :development
+  prerelease: false
+  version_requirements: !ruby/object:Gem::Requirement
+    requirements:
+    - - ~>
+      - !ruby/object:Gem::Version
+        version: '2.3'
+- !ruby/object:Gem::Dependency
+  name: simplecov
+  requirement: !ruby/object:Gem::Requirement
+    requirements:
+    - - ~>
+      - !ruby/object:Gem::Version
+        version: '0.7'
+  type: :development
+  prerelease: false
+  version_requirements: !ruby/object:Gem::Requirement
+    requirements:
+    - - ~>
+      - !ruby/object:Gem::Version
+        version: '0.7'
+- !ruby/object:Gem::Dependency
+  name: simplecov-gem-adapter
+  requirement: !ruby/object:Gem::Requirement
+    requirements:
+    - - ~>
+      - !ruby/object:Gem::Version
+        version: 1.0.1
+  type: :development
+  prerelease: false
+  version_requirements: !ruby/object:Gem::Requirement
+    requirements:
+    - - ~>
+      - !ruby/object:Gem::Version
+        version: 1.0.1
+- !ruby/object:Gem::Dependency
+  name: coveralls
+  requirement: !ruby/object:Gem::Requirement
+    requirements:
+    - - ~>
+      - !ruby/object:Gem::Version
+        version: 0.7.0
+  type: :development
+  prerelease: false
+  version_requirements: !ruby/object:Gem::Requirement
+    requirements:
+    - - ~>
+      - !ruby/object:Gem::Version
+        version: 0.7.0
+- !ruby/object:Gem::Dependency
+  name: mime-types
+  requirement: !ruby/object:Gem::Requirement
+    requirements:
+    - - ~>
+      - !ruby/object:Gem::Version
+        version: '1.5'
+  type: :development
+  prerelease: false
+  version_requirements: !ruby/object:Gem::Requirement
+    requirements:
+    - - ~>
+      - !ruby/object:Gem::Version
+        version: '1.5'
+- !ruby/object:Gem::Dependency
+  name: activesupport
+  requirement: !ruby/object:Gem::Requirement
+    requirements:
+    - - ~>
+      - !ruby/object:Gem::Version
+        version: 3.2.13
+  type: :development
+  prerelease: false
+  version_requirements: !ruby/object:Gem::Requirement
+    requirements:
+    - - ~>
+      - !ruby/object:Gem::Version
+        version: 3.2.13
+- !ruby/object:Gem::Dependency
+  name: jekyll_test_plugin
+  requirement: !ruby/object:Gem::Requirement
+    requirements:
+    - - '>='
+      - !ruby/object:Gem::Version
+        version: '0'
+  type: :development
+  prerelease: false
+  version_requirements: !ruby/object:Gem::Requirement
+    requirements:
+    - - '>='
+      - !ruby/object:Gem::Version
+        version: '0'
 description: Jekyll is a simple, blog aware, static site generator.
 email: tom@mojombo.com
-executables: 
+executables:
 - jekyll
 extensions: []
-
-extra_rdoc_files: 
-- README.textile
+extra_rdoc_files:
+- README.markdown
 - LICENSE
-files: 
+files:
+- CONTRIBUTING.markdown
 - Gemfile
-- History.txt
+- History.markdown
 - LICENSE
-- README.textile
+- README.markdown
 - Rakefile
 - bin/jekyll
 - cucumber.yml
 - features/create_sites.feature
+- features/data.feature
+- features/drafts.feature
 - features/embed_filters.feature
+- features/include_tag.feature
 - features/markdown.feature
 - features/pagination.feature
 - features/permalinks.feature
 - features/post_data.feature
+- features/post_excerpts.feature
 - features/site_configuration.feature
 - features/site_data.feature
 - features/step_definitions/jekyll_steps.rb
 - features/support/env.rb
 - jekyll.gemspec
 - lib/jekyll.rb
+- lib/jekyll/cleaner.rb
+- lib/jekyll/command.rb
+- lib/jekyll/commands/build.rb
+- lib/jekyll/commands/doctor.rb
+- lib/jekyll/commands/new.rb
+- lib/jekyll/commands/serve.rb
+- lib/jekyll/configuration.rb
 - lib/jekyll/converter.rb
 - lib/jekyll/converters/identity.rb
 - lib/jekyll/converters/markdown.rb
+- lib/jekyll/converters/markdown/kramdown_parser.rb
+- lib/jekyll/converters/markdown/maruku_parser.rb
+- lib/jekyll/converters/markdown/rdiscount_parser.rb
+- lib/jekyll/converters/markdown/redcarpet_parser.rb
 - lib/jekyll/converters/textile.rb
 - lib/jekyll/convertible.rb
 - lib/jekyll/core_ext.rb
+- lib/jekyll/deprecator.rb
+- lib/jekyll/draft.rb
+- lib/jekyll/entry_filter.rb
 - lib/jekyll/errors.rb
+- lib/jekyll/excerpt.rb
 - lib/jekyll/filters.rb
 - lib/jekyll/generator.rb
 - lib/jekyll/generators/pagination.rb
 - lib/jekyll/layout.rb
-- lib/jekyll/migrators/csv.rb
-- lib/jekyll/migrators/drupal.rb
-- lib/jekyll/migrators/enki.rb
-- lib/jekyll/migrators/marley.rb
-- lib/jekyll/migrators/mephisto.rb
-- lib/jekyll/migrators/mt.rb
-- lib/jekyll/migrators/posterous.rb
-- lib/jekyll/migrators/textpattern.rb
-- lib/jekyll/migrators/tumblr.rb
-- lib/jekyll/migrators/typo.rb
-- lib/jekyll/migrators/wordpress.rb
-- lib/jekyll/migrators/wordpressdotcom.rb
+- lib/jekyll/mime.types
 - lib/jekyll/page.rb
 - lib/jekyll/plugin.rb
 - lib/jekyll/post.rb
+- lib/jekyll/related_posts.rb
 - lib/jekyll/site.rb
 - lib/jekyll/static_file.rb
+- lib/jekyll/stevenson.rb
+- lib/jekyll/tags/gist.rb
 - lib/jekyll/tags/highlight.rb
 - lib/jekyll/tags/include.rb
+- lib/jekyll/tags/post_url.rb
+- lib/jekyll/url.rb
+- lib/site_template/.gitignore
+- lib/site_template/_config.yml
+- lib/site_template/_layouts/default.html
+- lib/site_template/_layouts/post.html
+- lib/site_template/_posts/0000-00-00-welcome-to-jekyll.markdown.erb
+- lib/site_template/css/main.css
+- lib/site_template/css/syntax.css
+- lib/site_template/index.html
+- script/bootstrap
+- site/.gitignore
+- site/CNAME
+- site/README
+- site/_config.yml
+- site/_includes/analytics.html
+- site/_includes/docs_contents.html
+- site/_includes/docs_contents_mobile.html
+- site/_includes/docs_option.html
+- site/_includes/docs_ul.html
+- site/_includes/footer.html
+- site/_includes/header.html
+- site/_includes/news_contents.html
+- site/_includes/news_contents_mobile.html
+- site/_includes/news_item.html
+- site/_includes/primary-nav-items.html
+- site/_includes/section_nav.html
+- site/_includes/top.html
+- site/_layouts/default.html
+- site/_layouts/docs.html
+- site/_layouts/news.html
+- site/_layouts/news_item.html
+- site/_posts/2013-05-06-jekyll-1-0-0-released.markdown
+- site/_posts/2013-05-08-jekyll-1-0-1-released.markdown
+- site/_posts/2013-05-12-jekyll-1-0-2-released.markdown
+- site/_posts/2013-06-07-jekyll-1-0-3-released.markdown
+- site/_posts/2013-07-14-jekyll-1-1-0-released.markdown
+- site/_posts/2013-07-24-jekyll-1-1-1-released.markdown
+- site/_posts/2013-07-25-jekyll-1-0-4-released.markdown
+- site/_posts/2013-07-25-jekyll-1-1-2-released.markdown
+- site/_posts/2013-09-06-jekyll-1-2-0-released.markdown
+- site/_posts/2013-09-14-jekyll-1-2-1-released.markdown
+- site/_posts/2013-10-28-jekyll-1-3-0-rc1-released.markdown
+- site/_posts/2013-11-04-jekyll-1-3-0-released.markdown
+- site/_posts/2013-11-26-jekyll-1-3-1-released.markdown
+- site/_posts/2013-12-07-jekyll-1-4-0-released.markdown
+- site/_posts/2013-12-16-jekyll-1-4-2-released.markdown
+- site/css/gridism.css
+- site/css/normalize.css
+- site/css/pygments.css
+- site/css/style.css
+- site/docs/configuration.md
+- site/docs/contributing.md
+- site/docs/datafiles.md
+- site/docs/deployment-methods.md
+- site/docs/drafts.md
+- site/docs/extras.md
+- site/docs/frontmatter.md
+- site/docs/github-pages.md
+- site/docs/heroku.md
+- site/docs/history.md
+- site/docs/index.md
+- site/docs/installation.md
+- site/docs/migrations.md
+- site/docs/pages.md
+- site/docs/pagination.md
+- site/docs/permalinks.md
+- site/docs/plugins.md
+- site/docs/posts.md
+- site/docs/quickstart.md
+- site/docs/resources.md
+- site/docs/sites.md
+- site/docs/structure.md
+- site/docs/templates.md
+- site/docs/troubleshooting.md
+- site/docs/upgrading.md
+- site/docs/usage.md
+- site/docs/variables.md
+- site/favicon.png
+- site/feed.xml
+- site/freenode.txt
+- site/img/article-footer.png
+- site/img/footer-arrow.png
+- site/img/footer-logo.png
+- site/img/logo-2x.png
+- site/img/octojekyll.png
+- site/img/tube.png
+- site/img/tube1x.png
+- site/index.html
+- site/js/modernizr-2.5.3.min.js
+- site/news/index.html
+- site/news/releases/index.html
+- test/fixtures/broken_front_matter1.erb
+- test/fixtures/broken_front_matter2.erb
+- test/fixtures/broken_front_matter3.erb
+- test/fixtures/exploit_front_matter.erb
+- test/fixtures/front_matter.erb
 - test/helper.rb
+- test/source/+/foo.md
 - test/source/.htaccess
+- test/source/_config.dev.toml
+- test/source/_data/languages.yml
+- test/source/_data/members.yaml
+- test/source/_data/products.yml
+- test/source/_includes/params.html
 - test/source/_includes/sig.markdown
 - test/source/_layouts/default.html
+- test/source/_layouts/post/simple.html
 - test/source/_layouts/simple.html
+- test/source/_plugins/dummy.rb
 - test/source/_posts/2008-02-02-not-published.textile
 - test/source/_posts/2008-02-02-published.textile
 - test/source/_posts/2008-10-18-foo-bar.textile
@@ -332,73 +579,93 @@ files:
 - test/source/_posts/2010-01-16-override-data.textile
 - test/source/_posts/2011-04-12-md-extension.md
 - test/source/_posts/2011-04-12-text-extension.text
+- test/source/_posts/2013-01-02-post-excerpt.markdown
+- test/source/_posts/2013-01-12-nil-layout.textile
+- test/source/_posts/2013-01-12-no-layout.textile
+- test/source/_posts/2013-03-19-not-a-post.markdown/.gitkeep
+- test/source/_posts/2013-04-11-custom-excerpt.markdown
+- test/source/_posts/2013-05-10-number-category.textile
+- test/source/_posts/2013-07-22-post-excerpt-with-layout.markdown
+- test/source/_posts/2013-08-01-mkdn-extension.mkdn
+- test/source/_posts/es/2008-11-21-nested.textile
 - test/source/about.html
 - test/source/category/_posts/2008-9-23-categories.textile
 - test/source/contacts.html
+- test/source/contacts/bar.html
+- test/source/contacts/index.html
 - test/source/css/screen.css
 - test/source/deal.with.dots.html
 - test/source/foo/_posts/bar/2008-12-12-topical-post.textile
 - test/source/index.html
+- test/source/products.yml
 - test/source/sitemap.xml
+- test/source/symlink-test/symlinked-file
 - test/source/win/_posts/2009-05-24-yaml-linebreak.markdown
 - test/source/z_category/_posts/2008-9-23-categories.textile
 - test/suite.rb
+- test/test_command.rb
 - test/test_configuration.rb
+- test/test_convertible.rb
 - test/test_core_ext.rb
+- test/test_entry_filter.rb
+- test/test_excerpt.rb
 - test/test_filters.rb
 - test/test_generated_site.rb
 - test/test_kramdown.rb
+- test/test_new_command.rb
 - test/test_page.rb
 - test/test_pager.rb
 - test/test_post.rb
 - test/test_rdiscount.rb
 - test/test_redcarpet.rb
+- test/test_redcloth.rb
+- test/test_related_posts.rb
 - test/test_site.rb
 - test/test_tags.rb
-has_rdoc: true
+- test/test_url.rb
 homepage: http://github.com/mojombo/jekyll
-licenses: []
-
+licenses:
+- MIT
+metadata: {}
 post_install_message: 
-rdoc_options: 
+rdoc_options:
 - --charset=UTF-8
-require_paths: 
+require_paths:
 - lib
-required_ruby_version: !ruby/object:Gem::Requirement 
-  none: false
-  requirements: 
-  - - ">="
-    - !ruby/object:Gem::Version 
-      hash: 3
-      segments: 
-      - 0
-      version: "0"
-required_rubygems_version: !ruby/object:Gem::Requirement 
-  none: false
-  requirements: 
-  - - ">="
-    - !ruby/object:Gem::Version 
-      hash: 3
-      segments: 
-      - 0
-      version: "0"
+required_ruby_version: !ruby/object:Gem::Requirement
+  requirements:
+  - - '>='
+    - !ruby/object:Gem::Version
+      version: '0'
+required_rubygems_version: !ruby/object:Gem::Requirement
+  requirements:
+  - - '>='
+    - !ruby/object:Gem::Version
+      version: '0'
 requirements: []
-
 rubyforge_project: jekyll
-rubygems_version: 1.6.2
+rubygems_version: 2.0.14
 signing_key: 
 specification_version: 2
 summary: A simple, blog aware, static site generator.
-test_files: 
+test_files:
+- test/test_command.rb
 - test/test_configuration.rb
+- test/test_convertible.rb
 - test/test_core_ext.rb
+- test/test_entry_filter.rb
+- test/test_excerpt.rb
 - test/test_filters.rb
 - test/test_generated_site.rb
 - test/test_kramdown.rb
+- test/test_new_command.rb
 - test/test_page.rb
 - test/test_pager.rb
 - test/test_post.rb
 - test/test_rdiscount.rb
 - test/test_redcarpet.rb
+- test/test_redcloth.rb
+- test/test_related_posts.rb
 - test/test_site.rb
 - test/test_tags.rb
+- test/test_url.rb

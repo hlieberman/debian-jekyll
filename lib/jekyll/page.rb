@@ -1,5 +1,4 @@
 module Jekyll
-
   class Page
     include Convertible
 
@@ -7,6 +6,13 @@ module Jekyll
     attr_accessor :site, :pager
     attr_accessor :name, :ext, :basename
     attr_accessor :data, :content, :output
+
+    # Attributes for Liquid templates
+    ATTRIBUTES_FOR_LIQUID = %w[
+      url
+      content
+      path
+    ]
 
     # Initialize a new Page.
     #
@@ -38,17 +44,28 @@ module Jekyll
     #
     # Returns the String permalink or nil if none has been set.
     def permalink
-      self.data && self.data['permalink']
+      return nil if self.data.nil? || self.data['permalink'].nil?
+      if site.config['relative_permalinks']
+        File.join(@dir, self.data['permalink'])
+      else
+        self.data['permalink']
+      end
     end
 
     # The template of the permalink.
     #
     # Returns the template String.
     def template
-      if self.site.permalink_style == :pretty && !index? && html?
-        "/:basename/"
+      if self.site.permalink_style == :pretty
+        if index? && html?
+          "/:path/"
+        elsif html?
+          "/:path/:basename/"
+        else
+          "/:path/:basename:output_ext"
+        end
       else
-        "/:basename:output_ext"
+        "/:path/:basename:output_ext"
       end
     end
 
@@ -56,23 +73,21 @@ module Jekyll
     #
     # Returns the String url.
     def url
-      return @url if @url
+      @url ||= URL.new({
+        :template => template,
+        :placeholders => url_placeholders,
+        :permalink => permalink
+      }).to_s
+    end
 
-      url = if permalink
-        permalink
-      else
-        {
-          "basename"   => self.basename,
-          "output_ext" => self.output_ext,
-        }.inject(template) { |result, token|
-          result.gsub(/:#{token.first}/, token.last)
-        }.gsub(/\/\//, "/")
-      end
-
-      # sanitize url
-      @url = url.split('/').reject{ |part| part =~ /^\.+$/ }.join('/')
-      @url += "/" if url =~ /\/$/
-      @url
+    # Returns a hash of URL placeholder names (as symbols) mapping to the
+    # desired placeholder replacements. For details see "url.rb"
+    def url_placeholders
+      {
+        :path       => @dir,
+        :basename   => self.basename,
+        :output_ext => self.output_ext
+      }
     end
 
     # Extract information from the page filename.
@@ -100,13 +115,16 @@ module Jekyll
       do_layout(payload, layouts)
     end
 
-    # Convert this Page's data to a Hash suitable for use by Liquid.
+    # The path to the source file
     #
-    # Returns the Hash representation of this Page.
-    def to_liquid
-      self.data.deep_merge({
-        "url"        => File.join(@dir, self.url),
-        "content"    => self.content })
+    # Returns the path to the source file
+    def path
+      self.data.fetch('path', self.relative_path.sub(/\A\//, ''))
+    end
+
+    # The path to the page source file, relative to the site source
+    def relative_path
+      File.join(@dir, @name)
     end
 
     # Obtain destination path.
@@ -115,24 +133,9 @@ module Jekyll
     #
     # Returns the destination file path String.
     def destination(dest)
-      # The url needs to be unescaped in order to preserve the correct
-      # filename.
-      path = File.join(dest, @dir, CGI.unescape(self.url))
+      path = File.join(dest, self.url)
       path = File.join(path, "index.html") if self.url =~ /\/$/
       path
-    end
-
-    # Write the generated page file to the destination directory.
-    #
-    # dest - The String path to the destination dir.
-    #
-    # Returns nothing.
-    def write(dest)
-      path = destination(dest)
-      FileUtils.mkdir_p(File.dirname(path))
-      File.open(path, 'w') do |f|
-        f.write(self.output)
-      end
     end
 
     # Returns the object as a debug String.
@@ -150,6 +153,8 @@ module Jekyll
       basename == 'index'
     end
 
+    def uses_relative_permalinks
+      permalink && @dir != "" && site.config['relative_permalinks']
+    end
   end
-
 end

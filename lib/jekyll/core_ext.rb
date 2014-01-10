@@ -24,7 +24,7 @@ class Hash
   # and then the plural key, and handling any nil entries.
   #   +hash+ the hash to read from
   #   +singular_key+ the singular key
-  #   +plural_key+ the singular key
+  #   +plural_key+ the plural key
   #
   # Returns an array
   def pluralized_array(singular_key, plural_key)
@@ -41,6 +41,17 @@ class Hash
     end
     array || []
   end
+
+  def symbolize_keys!
+    keys.each do |key|
+      self[(key.to_sym rescue key) || key] = delete(key)
+    end
+    self
+  end
+
+  def symbolize_keys
+    dup.symbolize_keys!
+  end
 end
 
 # Thanks, ActiveSupport!
@@ -49,4 +60,27 @@ class Date
   def xmlschema
     strftime("%Y-%m-%dT%H:%M:%S%Z")
   end if RUBY_VERSION < '1.9'
+end
+
+module Enumerable
+  # Returns true if path matches against any glob pattern.
+  # Look for more detail about glob pattern in method File::fnmatch.
+  def glob_include?(e)
+    any? { |exp| File.fnmatch?(exp, e) }
+  end
+end
+
+# Ruby 1.8's File.read don't support option.
+# read_with_options ignore optional parameter for 1.8,
+# and act as alias for 1.9 or later.
+class File
+  if RUBY_VERSION < '1.9'
+    def self.read_with_options(path, opts = {})
+      self.read(path)
+    end
+  else
+    def self.read_with_options(path, opts = {})
+      self.read(path, opts)
+    end
+  end
 end
