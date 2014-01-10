@@ -3,18 +3,28 @@ Section: ruby
 Priority: optional
 Maintainer: Debian Ruby Extras Maintainers <pkg-ruby-extras-maintainers@lists.alioth.debian.org>
 Uploaders: Youhei SASAKI <uwabami@gfd-dennou.org>
-Build-Depends: debhelper (>= 7.0.50~), gem2deb (>= 0.2.13~), rake,
+Build-Depends: debhelper (>= 7.0.50~), gem2deb (>= 0.2.13~), rake, rdoc,
  ruby-liquid,
- ruby-rdiscount,
  ruby-maruku,
- ruby-kramdown,
- ruby-shoulda,
- cucumber,
- ruby-rr,
- ruby-redcloth,
  ruby-classifier,
- ruby-albino,
- ruby-redcarpet
+ ruby-listen,
+ ruby-marku,
+ ruby-pygments.rb,
+ ruby-commander,
+ ruby-safe-yaml,
+ ruby-colorator,
+ ruby-redcarpet,
+ ruby-toml,
+ ruby-shoulda,
+ ruby-rr,
+ cucumber,
+ ruby-redcloth,
+ ruby-kramdown,
+ ruby-rdiscount,
+ ruby-launchy,
+ ruby-mime-types,
+ ruby-activesupport,
+ ruby-jekyll-test-plugin
 Standards-Version: 3.9.3
 Vcs-Git: git://anonscm.debian.org/pkg-ruby-extras/jekyll.git
 Vcs-Browser: http://anonscm.debian.org/gitweb?p=pkg-ruby-extras/jekyll.git;a=summary
@@ -27,10 +37,15 @@ XB-Ruby-Versions: ${ruby:Versions}
 Depends: ${shlibs:Depends}, ${misc:Depends}, ruby | ruby-interpreter,
  ruby-liquid,
  ruby-maruku,
- ruby-albino,
- ruby-kramdown,
  ruby-classifier,
- ruby-directory-watcher
+ ruby-listen,
+ ruby-marku,
+ ruby-pygments.rb,
+ ruby-commander,
+ ruby-safe-yaml,
+ ruby-colorator,
+ ruby-redcarpet,
+ ruby-toml
 Recommends: ruby-sequel, ruby-sequel-pg, ruby-mysql
 Description: Simple, blog aware, static site generator
  Jekyll is a simple, blog aware, static site generator. It takes a

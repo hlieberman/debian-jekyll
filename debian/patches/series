@@ -1,3 +1,4 @@
-0001-Remove-RubyGems-Depends.patch
-0002-Fix-Redcarpet-and-Test-Upstream-Issues-539.patch
-0003-Remove-RedGreen-Dependencies.patch
+0001-Drop-coverage-simplecov-dependencies.patch
+0002-Drop-rubygems-Depends.patch
+0003-use-colored-instead-of-colorator.patch
+0004-Downcase-RedCloth.patch
