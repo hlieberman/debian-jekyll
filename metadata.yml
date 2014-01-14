@@ -1,14 +1,14 @@
 --- !ruby/object:Gem::Specification
 name: jekyll
 version: !ruby/object:Gem::Version
-  version: 1.4.2
+  version: 1.4.3
 platform: ruby
 authors:
 - Tom Preston-Werner
 autorequire: 
 bindir: bin
 cert_chain: []
-date: 2013-12-16 00:00:00.000000000 Z
+date: 2014-01-13 00:00:00.000000000 Z
 dependencies:
 - !ruby/object:Gem::Dependency
   name: liquid
@@ -16,14 +16,14 @@ dependencies:
     requirements:
     - - ~>
       - !ruby/object:Gem::Version
-        version: 2.5.2
+        version: 2.5.5
   type: :runtime
   prerelease: false
   version_requirements: !ruby/object:Gem::Requirement
     requirements:
     - - ~>
       - !ruby/object:Gem::Version
-        version: 2.5.2
+        version: 2.5.5
 - !ruby/object:Gem::Dependency
   name: classifier
   requirement: !ruby/object:Gem::Requirement
@@ -491,6 +491,7 @@ files:
 - site/_posts/2013-11-26-jekyll-1-3-1-released.markdown
 - site/_posts/2013-12-07-jekyll-1-4-0-released.markdown
 - site/_posts/2013-12-16-jekyll-1-4-2-released.markdown
+- site/_posts/2014-01-13-jekyll-1-4-3-released.markdown
 - site/css/gridism.css
 - site/css/normalize.css
 - site/css/pygments.css
@@ -587,6 +588,7 @@ files:
 - test/source/_posts/2013-05-10-number-category.textile
 - test/source/_posts/2013-07-22-post-excerpt-with-layout.markdown
 - test/source/_posts/2013-08-01-mkdn-extension.mkdn
+- test/source/_posts/2014-01-06-permalink-traversal.md
 - test/source/_posts/es/2008-11-21-nested.textile
 - test/source/about.html
 - test/source/category/_posts/2008-9-23-categories.textile
@@ -595,6 +597,7 @@ files:
 - test/source/contacts/index.html
 - test/source/css/screen.css
 - test/source/deal.with.dots.html
+- test/source/exploit.md
 - test/source/foo/_posts/bar/2008-12-12-topical-post.textile
 - test/source/index.html
 - test/source/products.yml
