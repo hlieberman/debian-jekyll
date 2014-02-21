@@ -1,52 +1,56 @@
 Source: jekyll
-Section: ruby
-Priority: optional
 Maintainer: Debian Ruby Extras Maintainers <pkg-ruby-extras-maintainers@lists.alioth.debian.org>
 Uploaders: Youhei SASAKI <uwabami@gfd-dennou.org>
-Build-Depends: debhelper (>= 7.0.50~), gem2deb (>= 0.2.13~), rake, rdoc,
- ruby-liquid,
- ruby-maruku,
- ruby-classifier,
- ruby-listen,
- ruby-marku,
- ruby-pygments.rb,
- ruby-commander,
- ruby-safe-yaml,
- ruby-colorator,
- ruby-redcarpet,
- ruby-toml,
- ruby-shoulda,
- ruby-rr,
- cucumber,
- ruby-redcloth,
- ruby-kramdown,
- ruby-rdiscount,
- ruby-launchy,
- ruby-mime-types,
- ruby-activesupport,
- ruby-jekyll-test-plugin
-Standards-Version: 3.9.3
-Vcs-Git: git://anonscm.debian.org/pkg-ruby-extras/jekyll.git
+Section: ruby
+Priority: optional
+Build-Depends: cucumber,
+               debhelper (>= 9),
+               gem2deb (>= 0.2.13~),
+               rake,
+               rdoc,
+               ruby-activesupport,
+               ruby-classifier,
+               ruby-colorator,
+               ruby-commander,
+               ruby-jekyll-test-plugin,
+               ruby-kramdown,
+               ruby-launchy,
+               ruby-liquid,
+               ruby-listen,
+               ruby-maruku,
+               ruby-mime-types,
+               ruby-pygments.rb,
+               ruby-rdiscount,
+               ruby-redcarpet,
+               ruby-redcloth,
+               ruby-rr,
+               ruby-safe-yaml,
+               ruby-shoulda,
+               ruby-toml
+Standards-Version: 3.9.5
 Vcs-Browser: http://anonscm.debian.org/gitweb?p=pkg-ruby-extras/jekyll.git;a=summary
+Vcs-Git: git://anonscm.debian.org/pkg-ruby-extras/jekyll.git
 Homepage: http://github.com/mojombo/jekyll
 XS-Ruby-Versions: all
 
 Package: jekyll
 Architecture: all
-XB-Ruby-Versions: ${ruby:Versions}
-Depends: ${shlibs:Depends}, ${misc:Depends}, ruby | ruby-interpreter,
- ruby-liquid,
- ruby-maruku,
- ruby-classifier,
- ruby-listen,
- ruby-marku,
- ruby-pygments.rb,
- ruby-commander,
- ruby-safe-yaml,
- ruby-colorator,
- ruby-redcarpet,
- ruby-toml
-Recommends: ruby-sequel, ruby-sequel-pg, ruby-mysql
+Depends: ${misc:Depends},
+         ${shlibs:Depends},
+         ruby | ruby-interpreter,
+         ruby-classifier,
+         ruby-colorator,
+         ruby-commander,
+         ruby-liquid,
+         ruby-listen,
+         ruby-maruku,
+         ruby-pygments.rb,
+         ruby-redcarpet,
+         ruby-safe-yaml,
+         ruby-toml
+Recommends: ruby-sequel,
+            ruby-sequel-pg,
+            ruby-mysql
 Description: Simple, blog aware, static site generator
  Jekyll is a simple, blog aware, static site generator. It takes a
  template directory (representing the raw form of a website), runs it
@@ -57,3 +61,4 @@ Description: Simple, blog aware, static site generator
  This is also the engine behind GitHub Pages(http://pages.github.com),
  which you can use to host your project's page or blog right here from
  GitHub.
+XB-Ruby-Versions: ${ruby:Versions}
