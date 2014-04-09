@@ -2,3 +2,4 @@
 0002-Drop-rubygems-Depends.patch
 0003-use-colored-instead-of-colorator.patch
 0004-Downcase-RedCloth.patch
+remove-launchy-dependency

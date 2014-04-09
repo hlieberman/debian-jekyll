@@ -14,7 +14,6 @@ Build-Depends: cucumber,
                ruby-commander,
                ruby-jekyll-test-plugin,
                ruby-kramdown,
-               ruby-launchy,
                ruby-liquid,
                ruby-listen,
                ruby-maruku,
@@ -26,7 +25,8 @@ Build-Depends: cucumber,
                ruby-rr,
                ruby-safe-yaml,
                ruby-shoulda,
-               ruby-toml
+               ruby-toml,
+               xdg-utils
 Standards-Version: 3.9.5
 Vcs-Browser: http://anonscm.debian.org/gitweb?p=pkg-ruby-extras/jekyll.git;a=summary
 Vcs-Git: git://anonscm.debian.org/pkg-ruby-extras/jekyll.git

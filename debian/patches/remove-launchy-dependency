@@ -1,0 +1,55 @@
+Description:Remove launchy dependency
+ call to cross platform launchy to launch a web browser 
+ is replaced with direct call to xdg-open
+Author:dod@debian.org
+--- a/Rakefile
++++ b/Rakefile
+@@ -137,14 +137,12 @@
+ namespace :site do
+   desc "Generate and view the site locally"
+   task :preview do
+-    require "launchy"
+-
+     # Yep, it's a hack! Wait a few seconds for the Jekyll site to generate and
+     # then open it in a browser. Someday we can do better than this, I hope.
+     Thread.new do
+       sleep 4
+       puts "Opening in browser..."
+-      Launchy.open("http://localhost:4000")
++      sh "xdg-open http://localhost:4000"
+     end
+ 
+     # Generate the site in server mode.
+--- a/jekyll.gemspec
++++ b/jekyll.gemspec
+@@ -43,7 +43,6 @@
+   s.add_development_dependency('RedCloth', "~> 4.2")
+   s.add_development_dependency('kramdown', "~> 1.2")
+   s.add_development_dependency('rdiscount', "~> 1.6")
+-  s.add_development_dependency('launchy', "~> 2.3")
+   s.add_development_dependency('simplecov', "~> 0.7")
+   s.add_development_dependency('simplecov-gem-adapter', "~> 1.0.1")
+   s.add_development_dependency('coveralls', "~> 0.7.0")
+--- a/metadata.yml
++++ b/metadata.yml
+@@ -277,20 +277,6 @@
+       - !ruby/object:Gem::Version
+         version: '1.6'
+ - !ruby/object:Gem::Dependency
+-  name: launchy
+-  requirement: !ruby/object:Gem::Requirement
+-    requirements:
+-    - - ~>
+-      - !ruby/object:Gem::Version
+-        version: '2.3'
+-  type: :development
+-  prerelease: false
+-  version_requirements: !ruby/object:Gem::Requirement
+-    requirements:
+-    - - ~>
+-      - !ruby/object:Gem::Version
+-        version: '2.3'
+-- !ruby/object:Gem::Dependency
+   name: simplecov
+   requirement: !ruby/object:Gem::Requirement
+     requirements:
