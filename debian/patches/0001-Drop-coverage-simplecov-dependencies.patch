@@ -1,0 +1,26 @@
+From: Youhei SASAKI <uwabami@gfd-dennou.org>
+Date: Fri, 10 Jan 2014 22:18:48 +0900
+Subject: Drop coverage(simplecov) dependencies
+
+Signed-off-by: Youhei SASAKI <uwabami@gfd-dennou.org>
+---
+ test/helper.rb | 9 ---------
+ 1 file changed, 9 deletions(-)
+
+diff --git a/test/helper.rb b/test/helper.rb
+index 5eb4193..00f83a5 100644
+--- a/test/helper.rb
++++ b/test/helper.rb
+@@ -1,12 +1,3 @@
+-if RUBY_VERSION > '1.9'
+-  require 'simplecov'
+-  require 'simplecov-gem-adapter'
+-  SimpleCov.start('gem')
+-
+-  require 'coveralls'
+-  Coveralls.wear_merged!
+-end
+-
+ require 'rubygems'
+ require 'test/unit'
+ require 'ostruct'

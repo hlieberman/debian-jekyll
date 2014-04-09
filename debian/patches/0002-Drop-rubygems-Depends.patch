@@ -1,0 +1,48 @@
+From: Youhei SASAKI <uwabami@gfd-dennou.org>
+Date: Fri, 10 Jan 2014 22:20:15 +0900
+Subject: Drop rubygems Depends
+
+Signed-off-by: Youhei SASAKI <uwabami@gfd-dennou.org>
+---
+ lib/jekyll.rb  | 3 ---
+ test/helper.rb | 3 +--
+ test/suite.rb  | 2 --
+ 3 files changed, 1 insertion(+), 7 deletions(-)
+
+diff --git a/lib/jekyll.rb b/lib/jekyll.rb
+index 4d6af06..5995ff1 100644
+--- a/lib/jekyll.rb
++++ b/lib/jekyll.rb
+@@ -12,9 +12,6 @@ def require_all(path)
+   end
+ end
+ 
+-# rubygems
+-require 'rubygems'
+-
+ # stdlib
+ require 'fileutils'
+ require 'time'
+diff --git a/test/helper.rb b/test/helper.rb
+index 00f83a5..0e794a2 100644
+--- a/test/helper.rb
++++ b/test/helper.rb
+@@ -1,7 +1,6 @@
+-require 'rubygems'
+ require 'test/unit'
+ require 'ostruct'
+-gem 'RedCloth', '>= 4.2.1'
++require 'redcloth'
+ 
+ require 'jekyll'
+ 
+diff --git a/test/suite.rb b/test/suite.rb
+index 81b6171..60b2f56 100644
+--- a/test/suite.rb
++++ b/test/suite.rb
+@@ -1,5 +1,3 @@
+-require 'rubygems'
+-gem 'test-unit'
+ require 'test/unit'
+ 
+ # for some reason these tests fail when run via TextMate
