@@ -1,8 +1,6 @@
-From: Youhei SASAKI <uwabami@gfd-dennou.org>
-Date: Fri, 10 Jan 2014 22:18:48 +0900
-Subject: Drop coverage(simplecov) dependencies
-
-Signed-off-by: Youhei SASAKI <uwabami@gfd-dennou.org>
+Description:Drop coverage simplecov dependencies.patch
+Subject:Drop coverage(simplecov) dependencies
+From:Youhei SASAKI <uwabami@gfd-dennou.org>
 ---
  test/helper.rb | 9 ---------
  1 file changed, 9 deletions(-)

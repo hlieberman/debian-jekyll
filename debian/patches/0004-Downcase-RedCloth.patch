@@ -1,8 +1,6 @@
-From: Youhei SASAKI <uwabami@gfd-dennou.org>
-Date: Fri, 10 Jan 2014 22:34:25 +0900
-Subject: Downcase: RedCloth
-
-Signed-off-by: Youhei SASAKI <uwabami@gfd-dennou.org>
+Description:Downcase RedCloth.patch
+Subject:Downcase: RedCloth
+From:Youhei SASAKI <uwabami@gfd-dennou.org>
 ---
  test/helper.rb | 3 ---
  1 file changed, 3 deletions(-)

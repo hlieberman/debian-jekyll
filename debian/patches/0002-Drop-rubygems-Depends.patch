@@ -1,8 +1,6 @@
-From: Youhei SASAKI <uwabami@gfd-dennou.org>
-Date: Fri, 10 Jan 2014 22:20:15 +0900
-Subject: Drop rubygems Depends
-
-Signed-off-by: Youhei SASAKI <uwabami@gfd-dennou.org>
+Description:Drop rubygems Depends.patch
+Subject:Drop rubygems Depends
+From:Youhei SASAKI <uwabami@gfd-dennou.org>
 ---
  lib/jekyll.rb  | 3 ---
  test/helper.rb | 3 +--
