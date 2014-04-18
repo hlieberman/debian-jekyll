@@ -1,4 +1,6 @@
-jekyll (1.4.3-1) UNRELEASED; urgency=medium
+jekyll (1.5.1-1~1.gbp3fdb08) UNRELEASED; urgency=medium
+
+  ** SNAPSHOT build @3fdb081a10d7572e6c761537de5428bddff5295e **
 
   [ Youhei SASAKI ]
   * Imported Upstream version 0.11.2
@@ -18,8 +20,9 @@ jekyll (1.4.3-1) UNRELEASED; urgency=medium
   * control: actual dep is on version 3.2 of ruby-activesupport
   * updated patch headers for DEP-3
   * removed dependency on launchy and use xdg-open instead
+  * Imported Upstream version 1.5.1
 
- -- Youhei SASAKI <uwabami@gfd-dennou.org>  Fri, 18 Apr 2014 13:41:51 +0200
+ -- Dominique Dumont <dod@debian.org>  Fri, 18 Apr 2014 14:13:54 +0200
 
 jekyll (0.11.2-1) unstable; urgency=low
 
