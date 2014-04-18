@@ -4,9 +4,9 @@ Gem::Specification.new do |s|
   s.rubygems_version = '1.3.5'
 
   s.name              = 'jekyll'
-  s.version           = '1.4.3'
+  s.version           = '1.5.1'
   s.license           = 'MIT'
-  s.date              = '2014-01-13'
+  s.date              = '2014-03-28'
   s.rubyforge_project = 'jekyll'
 
   s.summary     = "A simple, blog aware, static site generator."
@@ -26,10 +26,10 @@ Gem::Specification.new do |s|
   s.add_runtime_dependency('liquid', "~> 2.5.5")
   s.add_runtime_dependency('classifier', "~> 1.3")
   s.add_runtime_dependency('listen', "~> 1.3")
-  s.add_runtime_dependency('maruku', "~> 0.7.0")
+  s.add_runtime_dependency('maruku', "0.7.0")
   s.add_runtime_dependency('pygments.rb', "~> 0.5.0")
   s.add_runtime_dependency('commander', "~> 4.1.3")
-  s.add_runtime_dependency('safe_yaml', "~> 0.9.7")
+  s.add_runtime_dependency('safe_yaml', "~> 1.0")
   s.add_runtime_dependency('colorator', "~> 0.1")
   s.add_runtime_dependency('redcarpet', "~> 2.3.0")
   s.add_runtime_dependency('toml', '~> 0.1.0')
@@ -39,7 +39,7 @@ Gem::Specification.new do |s|
   s.add_development_dependency('redgreen', "~> 1.2")
   s.add_development_dependency('shoulda', "~> 3.3.2")
   s.add_development_dependency('rr', "~> 1.1")
-  s.add_development_dependency('cucumber', "~> 1.3")
+  s.add_development_dependency('cucumber', "1.3.11")
   s.add_development_dependency('RedCloth', "~> 4.2")
   s.add_development_dependency('kramdown', "~> 1.2")
   s.add_development_dependency('rdiscount', "~> 1.6")
@@ -162,6 +162,8 @@ Gem::Specification.new do |s|
     site/_posts/2013-12-07-jekyll-1-4-0-released.markdown
     site/_posts/2013-12-16-jekyll-1-4-2-released.markdown
     site/_posts/2014-01-13-jekyll-1-4-3-released.markdown
+    site/_posts/2014-03-24-jekyll-1-5-0-released.markdown
+    site/_posts/2014-03-27-jekyll-1-5-1-released.markdown
     site/css/gridism.css
     site/css/normalize.css
     site/css/pygments.css
@@ -291,6 +293,7 @@ Gem::Specification.new do |s|
     test/test_new_command.rb
     test/test_page.rb
     test/test_pager.rb
+    test/test_path_sanitization.rb
     test/test_post.rb
     test/test_rdiscount.rb
     test/test_redcarpet.rb
