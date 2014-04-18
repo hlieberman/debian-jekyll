@@ -63,7 +63,7 @@ require_all 'jekyll/tags'
 SafeYAML::OPTIONS[:suppress_warnings] = true
 
 module Jekyll
-  VERSION = '1.4.3'
+  VERSION = '1.5.1'
 
   # Public: Generate a Jekyll configuration Hash by merging the default
   # options with anything in _config.yml, and adding the given options on top.
@@ -96,5 +96,18 @@ module Jekyll
 
   def self.logger
     @logger ||= Stevenson.new
+  end
+
+  # Get a subpath without any of the traversal nonsense.
+  #
+  # Returns a pure and clean path
+  def self.sanitized_path(base_directory, questionable_path)
+    clean_path = File.expand_path(questionable_path, "/")
+    clean_path.gsub!(/\A\w\:\//, '/')
+    unless clean_path.start_with?(base_directory)
+      File.join(base_directory, clean_path)
+    else
+      clean_path
+    end
   end
 end

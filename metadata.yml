@@ -1,377 +1,377 @@
 --- !ruby/object:Gem::Specification
 name: jekyll
 version: !ruby/object:Gem::Version
-  version: 1.4.3
+  version: 1.5.1
 platform: ruby
 authors:
 - Tom Preston-Werner
 autorequire: 
 bindir: bin
 cert_chain: []
-date: 2014-01-13 00:00:00.000000000 Z
+date: 2014-03-28 00:00:00.000000000 Z
 dependencies:
 - !ruby/object:Gem::Dependency
   name: liquid
   requirement: !ruby/object:Gem::Requirement
     requirements:
-    - - ~>
+    - - "~>"
       - !ruby/object:Gem::Version
         version: 2.5.5
   type: :runtime
   prerelease: false
   version_requirements: !ruby/object:Gem::Requirement
     requirements:
-    - - ~>
+    - - "~>"
       - !ruby/object:Gem::Version
         version: 2.5.5
 - !ruby/object:Gem::Dependency
   name: classifier
   requirement: !ruby/object:Gem::Requirement
     requirements:
-    - - ~>
+    - - "~>"
       - !ruby/object:Gem::Version
         version: '1.3'
   type: :runtime
   prerelease: false
   version_requirements: !ruby/object:Gem::Requirement
     requirements:
-    - - ~>
+    - - "~>"
       - !ruby/object:Gem::Version
         version: '1.3'
 - !ruby/object:Gem::Dependency
   name: listen
   requirement: !ruby/object:Gem::Requirement
     requirements:
-    - - ~>
+    - - "~>"
       - !ruby/object:Gem::Version
         version: '1.3'
   type: :runtime
   prerelease: false
   version_requirements: !ruby/object:Gem::Requirement
     requirements:
-    - - ~>
+    - - "~>"
       - !ruby/object:Gem::Version
         version: '1.3'
 - !ruby/object:Gem::Dependency
   name: maruku
   requirement: !ruby/object:Gem::Requirement
     requirements:
-    - - ~>
+    - - '='
       - !ruby/object:Gem::Version
         version: 0.7.0
   type: :runtime
   prerelease: false
   version_requirements: !ruby/object:Gem::Requirement
     requirements:
-    - - ~>
+    - - '='
       - !ruby/object:Gem::Version
         version: 0.7.0
 - !ruby/object:Gem::Dependency
   name: pygments.rb
   requirement: !ruby/object:Gem::Requirement
     requirements:
-    - - ~>
+    - - "~>"
       - !ruby/object:Gem::Version
         version: 0.5.0
   type: :runtime
   prerelease: false
   version_requirements: !ruby/object:Gem::Requirement
     requirements:
-    - - ~>
+    - - "~>"
       - !ruby/object:Gem::Version
         version: 0.5.0
 - !ruby/object:Gem::Dependency
   name: commander
   requirement: !ruby/object:Gem::Requirement
     requirements:
-    - - ~>
+    - - "~>"
       - !ruby/object:Gem::Version
         version: 4.1.3
   type: :runtime
   prerelease: false
   version_requirements: !ruby/object:Gem::Requirement
     requirements:
-    - - ~>
+    - - "~>"
       - !ruby/object:Gem::Version
         version: 4.1.3
 - !ruby/object:Gem::Dependency
   name: safe_yaml
   requirement: !ruby/object:Gem::Requirement
     requirements:
-    - - ~>
+    - - "~>"
       - !ruby/object:Gem::Version
-        version: 0.9.7
+        version: '1.0'
   type: :runtime
   prerelease: false
   version_requirements: !ruby/object:Gem::Requirement
     requirements:
-    - - ~>
+    - - "~>"
       - !ruby/object:Gem::Version
-        version: 0.9.7
+        version: '1.0'
 - !ruby/object:Gem::Dependency
   name: colorator
   requirement: !ruby/object:Gem::Requirement
     requirements:
-    - - ~>
+    - - "~>"
       - !ruby/object:Gem::Version
         version: '0.1'
   type: :runtime
   prerelease: false
   version_requirements: !ruby/object:Gem::Requirement
     requirements:
-    - - ~>
+    - - "~>"
       - !ruby/object:Gem::Version
         version: '0.1'
 - !ruby/object:Gem::Dependency
   name: redcarpet
   requirement: !ruby/object:Gem::Requirement
     requirements:
-    - - ~>
+    - - "~>"
       - !ruby/object:Gem::Version
         version: 2.3.0
   type: :runtime
   prerelease: false
   version_requirements: !ruby/object:Gem::Requirement
     requirements:
-    - - ~>
+    - - "~>"
       - !ruby/object:Gem::Version
         version: 2.3.0
 - !ruby/object:Gem::Dependency
   name: toml
   requirement: !ruby/object:Gem::Requirement
     requirements:
-    - - ~>
+    - - "~>"
       - !ruby/object:Gem::Version
         version: 0.1.0
   type: :runtime
   prerelease: false
   version_requirements: !ruby/object:Gem::Requirement
     requirements:
-    - - ~>
+    - - "~>"
       - !ruby/object:Gem::Version
         version: 0.1.0
 - !ruby/object:Gem::Dependency
   name: rake
   requirement: !ruby/object:Gem::Requirement
     requirements:
-    - - ~>
+    - - "~>"
       - !ruby/object:Gem::Version
         version: '10.1'
   type: :development
   prerelease: false
   version_requirements: !ruby/object:Gem::Requirement
     requirements:
-    - - ~>
+    - - "~>"
       - !ruby/object:Gem::Version
         version: '10.1'
 - !ruby/object:Gem::Dependency
   name: rdoc
   requirement: !ruby/object:Gem::Requirement
     requirements:
-    - - ~>
+    - - "~>"
       - !ruby/object:Gem::Version
         version: '3.11'
   type: :development
   prerelease: false
   version_requirements: !ruby/object:Gem::Requirement
     requirements:
-    - - ~>
+    - - "~>"
       - !ruby/object:Gem::Version
         version: '3.11'
 - !ruby/object:Gem::Dependency
   name: redgreen
   requirement: !ruby/object:Gem::Requirement
     requirements:
-    - - ~>
+    - - "~>"
       - !ruby/object:Gem::Version
         version: '1.2'
   type: :development
   prerelease: false
   version_requirements: !ruby/object:Gem::Requirement
     requirements:
-    - - ~>
+    - - "~>"
       - !ruby/object:Gem::Version
         version: '1.2'
 - !ruby/object:Gem::Dependency
   name: shoulda
   requirement: !ruby/object:Gem::Requirement
     requirements:
-    - - ~>
+    - - "~>"
       - !ruby/object:Gem::Version
         version: 3.3.2
   type: :development
   prerelease: false
   version_requirements: !ruby/object:Gem::Requirement
     requirements:
-    - - ~>
+    - - "~>"
       - !ruby/object:Gem::Version
         version: 3.3.2
 - !ruby/object:Gem::Dependency
   name: rr
   requirement: !ruby/object:Gem::Requirement
     requirements:
-    - - ~>
+    - - "~>"
       - !ruby/object:Gem::Version
         version: '1.1'
   type: :development
   prerelease: false
   version_requirements: !ruby/object:Gem::Requirement
     requirements:
-    - - ~>
+    - - "~>"
       - !ruby/object:Gem::Version
         version: '1.1'
 - !ruby/object:Gem::Dependency
   name: cucumber
   requirement: !ruby/object:Gem::Requirement
     requirements:
-    - - ~>
+    - - '='
       - !ruby/object:Gem::Version
-        version: '1.3'
+        version: 1.3.11
   type: :development
   prerelease: false
   version_requirements: !ruby/object:Gem::Requirement
     requirements:
-    - - ~>
+    - - '='
       - !ruby/object:Gem::Version
-        version: '1.3'
+        version: 1.3.11
 - !ruby/object:Gem::Dependency
   name: RedCloth
   requirement: !ruby/object:Gem::Requirement
     requirements:
-    - - ~>
+    - - "~>"
       - !ruby/object:Gem::Version
         version: '4.2'
   type: :development
   prerelease: false
   version_requirements: !ruby/object:Gem::Requirement
     requirements:
-    - - ~>
+    - - "~>"
       - !ruby/object:Gem::Version
         version: '4.2'
 - !ruby/object:Gem::Dependency
   name: kramdown
   requirement: !ruby/object:Gem::Requirement
     requirements:
-    - - ~>
+    - - "~>"
       - !ruby/object:Gem::Version
         version: '1.2'
   type: :development
   prerelease: false
   version_requirements: !ruby/object:Gem::Requirement
     requirements:
-    - - ~>
+    - - "~>"
       - !ruby/object:Gem::Version
         version: '1.2'
 - !ruby/object:Gem::Dependency
   name: rdiscount
   requirement: !ruby/object:Gem::Requirement
     requirements:
-    - - ~>
+    - - "~>"
       - !ruby/object:Gem::Version
         version: '1.6'
   type: :development
   prerelease: false
   version_requirements: !ruby/object:Gem::Requirement
     requirements:
-    - - ~>
+    - - "~>"
       - !ruby/object:Gem::Version
         version: '1.6'
 - !ruby/object:Gem::Dependency
   name: launchy
   requirement: !ruby/object:Gem::Requirement
     requirements:
-    - - ~>
+    - - "~>"
       - !ruby/object:Gem::Version
         version: '2.3'
   type: :development
   prerelease: false
   version_requirements: !ruby/object:Gem::Requirement
     requirements:
-    - - ~>
+    - - "~>"
       - !ruby/object:Gem::Version
         version: '2.3'
 - !ruby/object:Gem::Dependency
   name: simplecov
   requirement: !ruby/object:Gem::Requirement
     requirements:
-    - - ~>
+    - - "~>"
       - !ruby/object:Gem::Version
         version: '0.7'
   type: :development
   prerelease: false
   version_requirements: !ruby/object:Gem::Requirement
     requirements:
-    - - ~>
+    - - "~>"
       - !ruby/object:Gem::Version
         version: '0.7'
 - !ruby/object:Gem::Dependency
   name: simplecov-gem-adapter
   requirement: !ruby/object:Gem::Requirement
     requirements:
-    - - ~>
+    - - "~>"
       - !ruby/object:Gem::Version
         version: 1.0.1
   type: :development
   prerelease: false
   version_requirements: !ruby/object:Gem::Requirement
     requirements:
-    - - ~>
+    - - "~>"
       - !ruby/object:Gem::Version
         version: 1.0.1
 - !ruby/object:Gem::Dependency
   name: coveralls
   requirement: !ruby/object:Gem::Requirement
     requirements:
-    - - ~>
+    - - "~>"
       - !ruby/object:Gem::Version
         version: 0.7.0
   type: :development
   prerelease: false
   version_requirements: !ruby/object:Gem::Requirement
     requirements:
-    - - ~>
+    - - "~>"
       - !ruby/object:Gem::Version
         version: 0.7.0
 - !ruby/object:Gem::Dependency
   name: mime-types
   requirement: !ruby/object:Gem::Requirement
     requirements:
-    - - ~>
+    - - "~>"
       - !ruby/object:Gem::Version
         version: '1.5'
   type: :development
   prerelease: false
   version_requirements: !ruby/object:Gem::Requirement
     requirements:
-    - - ~>
+    - - "~>"
       - !ruby/object:Gem::Version
         version: '1.5'
 - !ruby/object:Gem::Dependency
   name: activesupport
   requirement: !ruby/object:Gem::Requirement
     requirements:
-    - - ~>
+    - - "~>"
       - !ruby/object:Gem::Version
         version: 3.2.13
   type: :development
   prerelease: false
   version_requirements: !ruby/object:Gem::Requirement
     requirements:
-    - - ~>
+    - - "~>"
       - !ruby/object:Gem::Version
         version: 3.2.13
 - !ruby/object:Gem::Dependency
   name: jekyll_test_plugin
   requirement: !ruby/object:Gem::Requirement
     requirements:
-    - - '>='
+    - - ">="
       - !ruby/object:Gem::Version
         version: '0'
   type: :development
   prerelease: false
   version_requirements: !ruby/object:Gem::Requirement
     requirements:
-    - - '>='
+    - - ">="
       - !ruby/object:Gem::Version
         version: '0'
 description: Jekyll is a simple, blog aware, static site generator.
@@ -492,6 +492,8 @@ files:
 - site/_posts/2013-12-07-jekyll-1-4-0-released.markdown
 - site/_posts/2013-12-16-jekyll-1-4-2-released.markdown
 - site/_posts/2014-01-13-jekyll-1-4-3-released.markdown
+- site/_posts/2014-03-24-jekyll-1-5-0-released.markdown
+- site/_posts/2014-03-27-jekyll-1-5-1-released.markdown
 - site/css/gridism.css
 - site/css/normalize.css
 - site/css/pygments.css
@@ -618,6 +620,7 @@ files:
 - test/test_new_command.rb
 - test/test_page.rb
 - test/test_pager.rb
+- test/test_path_sanitization.rb
 - test/test_post.rb
 - test/test_rdiscount.rb
 - test/test_redcarpet.rb
@@ -632,22 +635,22 @@ licenses:
 metadata: {}
 post_install_message: 
 rdoc_options:
-- --charset=UTF-8
+- "--charset=UTF-8"
 require_paths:
 - lib
 required_ruby_version: !ruby/object:Gem::Requirement
   requirements:
-  - - '>='
+  - - ">="
     - !ruby/object:Gem::Version
       version: '0'
 required_rubygems_version: !ruby/object:Gem::Requirement
   requirements:
-  - - '>='
+  - - ">="
     - !ruby/object:Gem::Version
       version: '0'
 requirements: []
 rubyforge_project: jekyll
-rubygems_version: 2.0.14
+rubygems_version: 2.2.2
 signing_key: 
 specification_version: 2
 summary: A simple, blog aware, static site generator.
@@ -664,6 +667,7 @@ test_files:
 - test/test_new_command.rb
 - test/test_page.rb
 - test/test_pager.rb
+- test/test_path_sanitization.rb
 - test/test_post.rb
 - test/test_rdiscount.rb
 - test/test_redcarpet.rb
