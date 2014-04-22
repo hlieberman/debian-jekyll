@@ -30,26 +30,3 @@ Author:dod@debian.org
    s.add_development_dependency('simplecov', "~> 0.7")
    s.add_development_dependency('simplecov-gem-adapter', "~> 1.0.1")
    s.add_development_dependency('coveralls', "~> 0.7.0")
---- a/metadata.yml
-+++ b/metadata.yml
-@@ -277,20 +277,6 @@
-       - !ruby/object:Gem::Version
-         version: '1.6'
- - !ruby/object:Gem::Dependency
--  name: launchy
--  requirement: !ruby/object:Gem::Requirement
--    requirements:
--    - - ~>
--      - !ruby/object:Gem::Version
--        version: '2.3'
--  type: :development
--  prerelease: false
--  version_requirements: !ruby/object:Gem::Requirement
--    requirements:
--    - - ~>
--      - !ruby/object:Gem::Version
--        version: '2.3'
--- !ruby/object:Gem::Dependency
-   name: simplecov
-   requirement: !ruby/object:Gem::Requirement
-     requirements:
