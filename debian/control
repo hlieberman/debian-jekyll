@@ -1,6 +1,7 @@
 Source: jekyll
 Maintainer: Debian Ruby Extras Maintainers <pkg-ruby-extras-maintainers@lists.alioth.debian.org>
-Uploaders: Youhei SASAKI <uwabami@gfd-dennou.org>
+Uploaders: Youhei SASAKI <uwabami@gfd-dennou.org>,
+ Dominique Dumont <dod@debian.org>
 Section: ruby
 Priority: optional
 Build-Depends: cucumber,
