@@ -1,6 +1,7 @@
 Format: http://www.debian.org/doc/packaging-manuals/copyright-format/1.0/
 Upstream-Name: jekyll
 Source: https://github.com/jekyll/jekyll
+Files-Excluded: site/js/modernizr-2.5.3.min.js
 
 Files: *
 Copyright: 2008-2014 Tom Preston-Werner, Nick Quaranto
