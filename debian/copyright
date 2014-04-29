@@ -1,14 +1,22 @@
 Format: http://www.debian.org/doc/packaging-manuals/copyright-format/1.0/
 Upstream-Name: jekyll
-Source: http://github.com/mojombo/jekyll
+Source: https://github.com/jekyll/jekyll
 
 Files: *
-Copyright: 2008 Tom Preston-Werner
+Copyright: 2008-2014 Tom Preston-Werner, Nick Quaranto
 License: Expat
 
 Files: debian/*
 Copyright: 2012 Youhei SASAKI <uwabami@gfd-dennou.org>
+ 2014 Dominique Dumont <dod@debian.org>
 License: Expat
+
+Files: site/js/modernizr-2.5.3.min.js
+Copyright: © 2009-2012, Faruk Ates
+  © 2009-2012, Paul Irish
+  © 2009-2012, Alex Sexton
+License: Expat
+Comment: This file is removed during build
 
 License: Expat
  Permission is hereby granted, free of charge, to any person obtaining a
@@ -28,4 +36,3 @@ License: Expat
  OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE,
  ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
  OTHER DEALINGS IN THE SOFTWARE.
-
