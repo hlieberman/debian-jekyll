@@ -25,7 +25,8 @@ Build-Depends: cucumber,
                ruby-safe-yaml,
                ruby-shoulda,
                ruby-toml,
-               xdg-utils
+               xdg-utils,
+               libjs-modernizr
 Standards-Version: 3.9.5
 Vcs-Browser: http://anonscm.debian.org/gitweb?p=pkg-ruby-extras/jekyll.git;a=summary
 Vcs-Git: git://anonscm.debian.org/pkg-ruby-extras/jekyll.git
@@ -46,7 +47,8 @@ Depends: ${misc:Depends},
          ruby-pygments.rb,
          ruby-redcarpet,
          ruby-safe-yaml,
-         ruby-toml
+         ruby-toml,
+         libjs-modernizr
 Recommends: ruby-sequel,
             ruby-sequel-pg,
             ruby-mysql
