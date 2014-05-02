@@ -1,6 +1,8 @@
-Description:Drop coverage simplecov dependencies.patch
-Subject:Drop coverage(simplecov) dependencies
-From:Youhei SASAKI <uwabami@gfd-dennou.org>
+From: Debian Ruby Extras Maintainers
+ <pkg-ruby-extras-maintainers@lists.alioth.debian.org>
+Date: Fri, 2 May 2014 15:38:28 +0900
+Subject: Drop SimpleCov dependencies
+
 ---
  test/helper.rb | 9 ---------
  1 file changed, 9 deletions(-)

@@ -1,6 +1,8 @@
-Description:Drop rubygems Depends.patch
-Subject:Drop rubygems Depends
-From:Youhei SASAKI <uwabami@gfd-dennou.org>
+From: Debian Ruby Extras Maintainers
+ <pkg-ruby-extras-maintainers@lists.alioth.debian.org>
+Date: Fri, 2 May 2014 15:38:28 +0900
+Subject: Drop RubyGems Depends
+
 ---
  lib/jekyll.rb  | 3 ---
  test/helper.rb | 3 +--
@@ -8,7 +10,7 @@ From:Youhei SASAKI <uwabami@gfd-dennou.org>
  3 files changed, 1 insertion(+), 7 deletions(-)
 
 diff --git a/lib/jekyll.rb b/lib/jekyll.rb
-index 4d6af06..5995ff1 100644
+index a2a97ba..a81ca7d 100644
 --- a/lib/jekyll.rb
 +++ b/lib/jekyll.rb
 @@ -12,9 +12,6 @@ def require_all(path)

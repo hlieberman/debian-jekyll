@@ -1,10 +1,18 @@
-Description:Remove launchy dependency
- call to cross platform launchy to launch a web browser 
- is replaced with direct call to xdg-open
-Author:dod@debian.org
+From: Debian Ruby Extras Maintainers
+ <pkg-ruby-extras-maintainers@lists.alioth.debian.org>
+Date: Fri, 2 May 2014 15:38:29 +0900
+Subject: Remove Launchy Dependencies
+
+---
+ Rakefile       | 4 +---
+ jekyll.gemspec | 1 -
+ 2 files changed, 1 insertion(+), 4 deletions(-)
+
+diff --git a/Rakefile b/Rakefile
+index b8eb85a..f0a504d 100644
 --- a/Rakefile
 +++ b/Rakefile
-@@ -137,14 +137,12 @@
+@@ -137,14 +137,12 @@ end
  namespace :site do
    desc "Generate and view the site locally"
    task :preview do
@@ -20,9 +28,11 @@ Author:dod@debian.org
      end
  
      # Generate the site in server mode.
+diff --git a/jekyll.gemspec b/jekyll.gemspec
+index c12b4a7..3fbdf4c 100644
 --- a/jekyll.gemspec
 +++ b/jekyll.gemspec
-@@ -43,7 +43,6 @@
+@@ -43,7 +43,6 @@ Gem::Specification.new do |s|
    s.add_development_dependency('RedCloth', "~> 4.2")
    s.add_development_dependency('kramdown', "~> 1.2")
    s.add_development_dependency('rdiscount', "~> 1.6")

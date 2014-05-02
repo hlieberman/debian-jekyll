@@ -1,6 +1,8 @@
-Description:Downcase RedCloth.patch
-Subject:Downcase: RedCloth
-From:Youhei SASAKI <uwabami@gfd-dennou.org>
+From: Debian Ruby Extras Maintainers
+ <pkg-ruby-extras-maintainers@lists.alioth.debian.org>
+Date: Fri, 2 May 2014 15:38:29 +0900
+Subject: Downcase RedCloth
+
 ---
  test/helper.rb | 3 ---
  1 file changed, 3 deletions(-)

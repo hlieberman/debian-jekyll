@@ -1,5 +1,4 @@
-0001-Drop-coverage-simplecov-dependencies.patch
-0002-Drop-rubygems-Depends.patch
-0003-use-colored-instead-of-colorator.patch
-0004-Downcase-RedCloth.patch
-remove-launchy-dependency
+0001-Drop-SimpleCov-dependencies.patch
+0002-Drop-RubyGems-Depends.patch
+0003-Downcase-RedCloth.patch
+0004-Remove-Launchy-Dependencies.patch
