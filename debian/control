@@ -1,7 +1,7 @@
 Source: jekyll
 Maintainer: Debian Ruby Extras Maintainers <pkg-ruby-extras-maintainers@lists.alioth.debian.org>
 Uploaders: Youhei SASAKI <uwabami@gfd-dennou.org>,
- Dominique Dumont <dod@debian.org>
+           Dominique Dumont <dod@debian.org>
 Section: ruby
 Priority: optional
 Build-Depends: cucumber,
@@ -38,18 +38,21 @@ Package: jekyll
 Architecture: all
 Depends: ${misc:Depends},
          ${shlibs:Depends},
+         libjs-modernizr,
          ruby | ruby-interpreter,
          ruby-classifier,
          ruby-colorator,
          ruby-commander,
+         ruby-kramdown,
          ruby-liquid,
          ruby-listen,
          ruby-maruku,
          ruby-pygments.rb,
+         ruby-rdiscount,
          ruby-redcarpet,
+         ruby-redcloth,
          ruby-safe-yaml,
-         ruby-toml,
-         libjs-modernizr
+         ruby-toml
 Recommends: ruby-sequel,
             ruby-sequel-pg,
             ruby-mysql
