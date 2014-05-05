@@ -1,3 +1,15 @@
+jekyll (1.5.1+dfsg1-2) unstable; urgency=medium
+
+  [ Youhei SASAKI ]
+  * Refresh patches, Drop obsolete patch (Closes: #746607)
+
+  [ Dominique Dumont ]
+  * control: added Depends on ruby-kramdows, ruby-rdiscount,
+    ruby-redcloth (Closes: #712952)
+  * forgot in last version: (Closes: #712954)
+
+ -- Dominique Dumont <dod@debian.org>  Mon, 05 May 2014 18:01:01 +0200
+
 jekyll (1.5.1+dfsg1-1) unstable; urgency=medium
 
   [ Cédric Boutillier ]
