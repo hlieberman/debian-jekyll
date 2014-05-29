@@ -20,7 +20,3 @@ override_dh_auto_clean:
 	dh_auto_clean
 	rm -fr $(CURDIR)/test/dest
 
-override_dh_clean:
-	# replace minified js files with link to system library
-	rm -rf $(TMP)/site/js/*.js
-	dh_clean

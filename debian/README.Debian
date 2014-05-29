@@ -1,6 +1,3 @@
 
 * Most tests are disabled because maruku 0.7.1 changed its behavoir and jekyll
   tests are written for maraku 0.7.0
-
-* site/js/modernizr-2.5.3.min.js from upstream is not used. This package
-  provides a symlink to the version provided by Debian
