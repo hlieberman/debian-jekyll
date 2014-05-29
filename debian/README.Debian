@@ -1,3 +1,6 @@
 
 * Most tests are disabled because maruku 0.7.1 changed its behavoir and jekyll
   tests are written for maraku 0.7.0
+
+* Unminified versions of respond.js, html5shiv.js, and normalize.css are being
+  inserted in as part of the build process.
