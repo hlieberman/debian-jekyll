@@ -30,7 +30,8 @@ relies on.
   <p>
     If you use UTF-8 encoding, make sure that no <code>BOM</code> header
     characters exist in your files or very, very bad things will happen to
-    Jekyll. This is especially relevant if you’re running Jekyll on Windows.
+    Jekyll. This is especially relevant if you’re running
+    <a href="../windows/">Jekyll on Windows</a>.
   </p>
 </div>
 
@@ -177,4 +178,14 @@ These are available out-of-the-box to be used in the front-matter for a post.
     </tr>
   </tbody>
 </table>
+</div>
+
+<div class="note">
+  <h5>ProTip™: Don't repeat yourself</h5>
+  <p>
+    If you don't want to repeat your frequently used front-matter variables over and over,
+    just define <a href="../configuration/#frontmatter-defaults" title="frontmatter defaults">defaults</a>
+    for them and only override them where necessary (or not at all). This works both for predefined
+    and custom variables.
+  </p>
 </div>

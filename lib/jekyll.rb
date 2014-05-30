@@ -18,21 +18,26 @@ require 'rubygems'
 # stdlib
 require 'fileutils'
 require 'time'
-require 'safe_yaml'
+require 'safe_yaml/load'
 require 'English'
 require 'pathname'
 
 # 3rd party
 require 'liquid'
-require 'maruku'
+require 'kramdown'
 require 'colorator'
 require 'toml'
 
 # internal requires
-require 'jekyll/core_ext'
+require 'jekyll/version'
+require 'jekyll/utils'
 require 'jekyll/stevenson'
 require 'jekyll/deprecator'
 require 'jekyll/configuration'
+require 'jekyll/document'
+require 'jekyll/collection'
+require 'jekyll/plugin_manager'
+require 'jekyll/frontmatter_defaults'
 require 'jekyll/site'
 require 'jekyll/convertible'
 require 'jekyll/url'
@@ -47,12 +52,16 @@ require 'jekyll/errors'
 require 'jekyll/related_posts'
 require 'jekyll/cleaner'
 require 'jekyll/entry_filter'
+require 'jekyll/layout_reader'
+require 'jekyll/publisher'
+require 'jekyll/renderer'
 
 # extensions
 require 'jekyll/plugin'
 require 'jekyll/converter'
 require 'jekyll/generator'
 require 'jekyll/command'
+require 'jekyll/liquid_extensions'
 
 require_all 'jekyll/commands'
 require_all 'jekyll/converters'
@@ -60,11 +69,13 @@ require_all 'jekyll/converters/markdown'
 require_all 'jekyll/generators'
 require_all 'jekyll/tags'
 
+# plugins
+require 'jekyll-coffeescript'
+require 'jekyll-sass-converter'
+
 SafeYAML::OPTIONS[:suppress_warnings] = true
 
 module Jekyll
-  VERSION = '1.5.1'
-
   # Public: Generate a Jekyll configuration Hash by merging the default
   # options with anything in _config.yml, and adding the given options on top.
   #
@@ -79,7 +90,7 @@ module Jekyll
     config = config.read_config_files(config.config_files(override))
 
     # Merge DEFAULTS < _config.yml < override
-    config = config.deep_merge(override).stringify_keys
+    config = Utils.deep_merge_hashes(config, override).stringify_keys
     set_timezone(config['timezone']) if config['timezone']
 
     config
@@ -98,11 +109,15 @@ module Jekyll
     @logger ||= Stevenson.new
   end
 
-  # Get a subpath without any of the traversal nonsense.
+  # Public: File system root
   #
-  # Returns a pure and clean path
+  # Returns the root of the filesystem as a Pathname
+  def self.fs_root
+    @fs_root ||= "/"
+  end
+
   def self.sanitized_path(base_directory, questionable_path)
-    clean_path = File.expand_path(questionable_path, "/")
+    clean_path = File.expand_path(questionable_path, fs_root)
     clean_path.gsub!(/\A\w\:\//, '/')
     unless clean_path.start_with?(base_directory)
       File.join(base_directory, clean_path)

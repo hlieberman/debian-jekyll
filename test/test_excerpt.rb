@@ -35,6 +35,48 @@ class TestExcerpt < Test::Unit::TestCase
       @excerpt = @post.send :extract_excerpt
     end
 
+    context "#include(string)" do
+
+      setup do
+        @excerpt.output = "Here is a fake output stub"
+      end
+
+      should "return true only if an excerpt output contains a specified string" do
+        assert @excerpt.include?("fake output")
+        refute @excerpt.include?("real output")
+      end
+    end
+
+    context "#id" do
+      should "contain the UID for the post" do
+        assert_equal @excerpt.id, "#{@post.id}/#excerpt"
+      end
+      should "return a string" do
+        assert_same @post.id.class, String
+      end
+    end
+
+    context "#to_s" do
+      should "return its content if no output present" do
+        assert_equal @excerpt.content, @excerpt.to_s
+      end
+
+      should "return its output if output present" do
+        @excerpt.output = "Fake Output"
+        assert_equal @excerpt.output, @excerpt.to_s
+      end
+    end
+
+    context "#inspect" do
+      should "contain the excerpt id as a shorthand string identifier" do
+        assert_equal @excerpt.inspect, "<Excerpt: #{@excerpt.id}>"
+      end
+
+      should "return a string" do
+        assert_same @post.id.class, String
+      end
+    end
+
     context "#to_liquid" do
       should "contain the proper page data to mimick the post liquid" do
         assert_equal "Post Excerpt with Layout", @excerpt.to_liquid["title"]
@@ -66,7 +108,7 @@ class TestExcerpt < Test::Unit::TestCase
         end
 
         should "be the first paragraph of the page" do
-          assert_equal "<p>First paragraph with <a href=\"http://www.jekyllrb.com/\">link ref</a>.</p>", @extracted_excerpt.content
+          assert_equal "<p>First paragraph with <a href=\"http://www.jekyllrb.com/\">link ref</a>.</p>\n\n", @extracted_excerpt.content
         end
 
         should "link properly" do

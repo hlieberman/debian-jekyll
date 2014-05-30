@@ -13,10 +13,11 @@ module Jekyll
       'data_source'   =>  '_data',
       'keep_files'    => ['.git','.svn'],
       'gems'          => [],
+      'collections'   => nil,
 
       'timezone'      => nil,           # use the local timezone
 
-      'encoding'      => nil,           # use the system encoding
+      'encoding'      => 'utf-8',       # always use utf-8 encoding. NEVER FORGET
 
       'safe'          => false,
       'detach'        => false,          # default to not detaching the server
@@ -24,19 +25,19 @@ module Jekyll
       'limit_posts'   => 0,
       'lsi'           => false,
       'future'        => true,           # remove and make true just default
-      'pygments'      => true,
+      'unpublished'   => false,
 
-      'relative_permalinks' => true,     # backwards-compatibility with < 1.0
-                                         # will be set to false once 2.0 hits
+      'relative_permalinks' => false,
 
-      'markdown'      => 'maruku',
+      'markdown'      => 'kramdown',
+      'highlighter'   => 'pygments',
       'permalink'     => 'date',
-      'baseurl'       => '/',
+      'baseurl'       => '',
       'include'       => ['.htaccess'],
       'exclude'       => [],
       'paginate_path' => '/page:num',
 
-      'markdown_ext'  => 'markdown,mkd,mkdn,md',
+      'markdown_ext'  => 'markdown,mkdown,mkdn,mkd,md',
       'textile_ext'   => 'textile',
 
       'port'          => '4000',
@@ -44,13 +45,15 @@ module Jekyll
 
       'excerpt_separator' => "\n\n",
 
+      'defaults'     => [],
+
       'maruku' => {
-        'fenced_code_blocks' => true,
         'use_tex'    => false,
         'use_divs'   => false,
         'png_engine' => 'blahtex',
         'png_dir'    => 'images/latex',
-        'png_url'    => '/images/latex'
+        'png_url'    => '/images/latex',
+        'fenced_code_blocks' => true
       },
 
       'rdiscount' => {
@@ -105,7 +108,7 @@ module Jekyll
       when '.toml'
         TOML.load_file(filename)
       when /\.y(a)?ml/
-        YAML.safe_load_file(filename)
+        SafeYAML.load_file(filename)
       else
         raise ArgumentError, "No parser for '#{filename}' is available. Use a .toml or .y(a)ml file instead."
       end
@@ -159,7 +162,7 @@ module Jekyll
       begin
         files.each do |config_file|
           new_config = read_config_file(config_file)
-          configuration = configuration.deep_merge(new_config)
+          configuration = Utils.deep_merge_hashes(configuration, new_config)
         end
       rescue ArgumentError => err
         Jekyll.logger.warn "WARNING:", "Error reading configuration. " +
@@ -210,6 +213,16 @@ module Jekyll
         config.delete('server_port')
       end
 
+      if config.has_key? 'pygments'
+        Jekyll.logger.warn "Deprecation:", "The 'pygments' configuration option" +
+                            " has been renamed to 'highlighter'. Please update your" +
+                            " config file accordingly. The allowed values are 'rouge', " +
+                            "'pygments' or null."
+
+        config['highlighter'] = 'pygments' if config['pygments']
+        config.delete('pygments')
+      end
+
       %w[include exclude].each do |option|
         if config.fetch(option, []).is_a?(String)
           Jekyll.logger.warn "Deprecation:", "The '#{option}' configuration option" +
@@ -218,6 +231,12 @@ module Jekyll
             " as a list of comma-separated values."
           config[option] = csv_to_array(config[option])
         end
+      end
+
+      if config.fetch('markdown', 'kramdown').to_s.downcase.eql?("maruku")
+        Jekyll::Deprecator.deprecation_message "You're using the 'maruku' " +
+          "Markdown processor. Maruku support has been deprecated and will " +
+          "be removed in 3.0.0. We recommend you switch to Kramdown."
       end
       config
     end
@@ -233,6 +252,5 @@ module Jekyll
 
       config
     end
-
   end
 end
