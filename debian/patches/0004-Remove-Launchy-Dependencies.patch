@@ -8,11 +8,9 @@ Subject: Remove Launchy Dependencies
  jekyll.gemspec | 1 -
  2 files changed, 1 insertion(+), 4 deletions(-)
 
-diff --git a/Rakefile b/Rakefile
-index b8eb85a..f0a504d 100644
 --- a/Rakefile
 +++ b/Rakefile
-@@ -137,14 +137,12 @@ end
+@@ -121,14 +121,12 @@
  namespace :site do
    desc "Generate and view the site locally"
    task :preview do
@@ -28,13 +26,11 @@ index b8eb85a..f0a504d 100644
      end
  
      # Generate the site in server mode.
-diff --git a/jekyll.gemspec b/jekyll.gemspec
-index c12b4a7..3fbdf4c 100644
 --- a/jekyll.gemspec
 +++ b/jekyll.gemspec
-@@ -43,7 +43,6 @@ Gem::Specification.new do |s|
+@@ -50,7 +50,6 @@
    s.add_development_dependency('RedCloth', "~> 4.2")
-   s.add_development_dependency('kramdown', "~> 1.2")
+   s.add_development_dependency('maruku', "0.7.0")
    s.add_development_dependency('rdiscount', "~> 1.6")
 -  s.add_development_dependency('launchy', "~> 2.3")
    s.add_development_dependency('simplecov', "~> 0.7")
