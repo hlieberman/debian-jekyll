@@ -1,3 +1,15 @@
+jekyll (2.0.3+dfsg-1) UNRELEASED; urgency=low
+
+  TODO: Decide what to do about jekyll-coffeescript and jekyll-sass-converter
+
+  * New upstream version.
+  * Add new files to d/copyright.
+  * New versions of jekyll don't use modernizr.
+  * Install the upstream changelog.
+  * Refresh patches for newer upstream version.
+
+ -- Harlan Lieberman-Berg <H.LiebermanBerg@gmail.com>  Fri, 30 May 2014 20:09:02 +0000
+
 jekyll (1.5.1+dfsg1-2) unstable; urgency=medium
 
   [ Youhei SASAKI ]
