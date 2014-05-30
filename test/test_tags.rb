@@ -6,7 +6,9 @@ class TestTags < Test::Unit::TestCase
 
   def create_post(content, override = {}, converter_class = Jekyll::Converters::Markdown)
     stub(Jekyll).configuration do
-      Jekyll::Configuration::DEFAULTS.deep_merge({'pygments' => true}).deep_merge(override)
+      site_configuration({
+        "highlighter" => "pygments"
+      }.merge(override))
     end
     site = Site.new(Jekyll.configuration)
 
@@ -16,8 +18,8 @@ class TestTags < Test::Unit::TestCase
 
     info = { :filters => [Jekyll::Filters], :registers => { :site => site } }
     @converter = site.converters.find { |c| c.class == converter_class }
-    payload = { "pygments_prefix" => @converter.pygments_prefix,
-                "pygments_suffix" => @converter.pygments_suffix }
+    payload = { "highlighter_prefix" => @converter.highlighter_prefix,
+                "highlighter_suffix" => @converter.highlighter_suffix }
 
     @result = Liquid::Template.parse(content).render!(payload, info)
     @result = @converter.convert(@result)
@@ -31,8 +33,12 @@ title: This is a test
 
 This document results in a markdown error with maruku
 
-{% highlight text %}#{code}{% endhighlight %}
-{% highlight text linenos %}#{code}{% endhighlight %}
+{% highlight text %}
+#{code}
+{% endhighlight %}
+{% highlight text linenos %}
+#{code}
+{% endhighlight %}
 CONTENT
     create_post(content, override)
   end
@@ -54,21 +60,21 @@ CONTENT
   end
 
   context "initialized tag" do
-    should "work" do
+    should "set the correct options" do
       tag = Jekyll::Tags::HighlightBlock.new('highlight', 'ruby ', ["test", "{% endhighlight %}", "\n"])
       assert_equal({}, tag.instance_variable_get(:@options))
 
       tag = Jekyll::Tags::HighlightBlock.new('highlight', 'ruby linenos ', ["test", "{% endhighlight %}", "\n"])
-      assert_equal({ 'linenos' => 'inline' }, tag.instance_variable_get(:@options))
+      assert_equal({ :linenos => 'inline' }, tag.instance_variable_get(:@options))
 
       tag = Jekyll::Tags::HighlightBlock.new('highlight', 'ruby linenos=table ', ["test", "{% endhighlight %}", "\n"])
-      assert_equal({ 'linenos' => 'table' }, tag.instance_variable_get(:@options))
+      assert_equal({ :linenos => 'table' }, tag.instance_variable_get(:@options))
 
       tag = Jekyll::Tags::HighlightBlock.new('highlight', 'ruby linenos=table nowrap', ["test", "{% endhighlight %}", "\n"])
-      assert_equal({ 'linenos' => 'table', 'nowrap' => true }, tag.instance_variable_get(:@options))
+      assert_equal({ :linenos => 'table', :nowrap => true }, tag.instance_variable_get(:@options))
 
       tag = Jekyll::Tags::HighlightBlock.new('highlight', 'ruby linenos=table cssclass=hl', ["test", "{% endhighlight %}", "\n"])
-      assert_equal({ 'cssclass' => 'hl', 'linenos' => 'table' }, tag.instance_variable_get(:@options))
+      assert_equal({ :cssclass => 'hl', :linenos => 'table' }, tag.instance_variable_get(:@options))
 
       tag = Jekyll::Tags::HighlightBlock.new('highlight', 'Ruby ', ["test", "{% endhighlight %}", "\n"])
       assert_equal "ruby", tag.instance_variable_get(:@lang), "lexers should be case insensitive"
@@ -85,11 +91,11 @@ CONTENT
     end
 
     should "render markdown with pygments" do
-      assert_match %{<pre><code class='text'>test\n</code></pre>}, @result
+      assert_match %{<pre><code class="text">test</code></pre>}, @result
     end
 
     should "render markdown with pygments with line numbers" do
-      assert_match %{<pre><code class='text'><span class='lineno'>1</span> test\n</code></pre>}, @result
+      assert_match %{<pre><code class="text"><span class="lineno">1</span> test</code></pre>}, @result
     end
   end
 
@@ -99,7 +105,7 @@ CONTENT
     end
 
     should "not embed the file" do
-      assert_match %{<pre><code class='text'>./jekyll.gemspec\n</code></pre>}, @result
+      assert_match %{<pre><code class="text">./jekyll.gemspec</code></pre>}, @result
     end
   end
 
@@ -109,7 +115,7 @@ CONTENT
     end
 
     should "render markdown with pygments line handling" do
-      assert_match %{<pre><code class='text'>Æ\n</code></pre>}, @result
+      assert_match %{<pre><code class="text">Æ</code></pre>}, @result
     end
   end
 
@@ -237,6 +243,22 @@ CONTENT
     end
   end
 
+  context "simple page with invalid post name linking" do
+    should "cause an error" do
+      content = <<CONTENT
+---
+title: Invalid post name linking
+---
+
+{% post_url abc2008-11-21-complex %}
+CONTENT
+
+      assert_raise ArgumentError do
+        create_post(content, {'permalink' => 'pretty', 'source' => source_dir, 'destination' => dest_dir, 'read_posts' => true})
+      end
+    end
+  end
+
   context "gist tag" do
     context "simple" do
       setup do
@@ -252,7 +274,7 @@ CONTENT
       end
 
       should "write script tag" do
-        assert_match "<script src='https://gist.github.com/#{@gist}.js'><![CDATA[\s]]></script>", @result
+        assert_match "<script src=\"https://gist.github.com/#{@gist}.js\">\s</script>", @result
       end
     end
 
@@ -272,7 +294,7 @@ CONTENT
         end
 
         should "write script tag with specific file in gist" do
-          assert_match "<script src='https://gist.github.com/#{@gist}.js?file=#{@filename}'><![CDATA[\s]]></script>", @result
+          assert_match "<script src=\"https://gist.github.com/#{@gist}.js?file=#{@filename}\">\s</script>", @result
         end
       end
 
@@ -308,7 +330,7 @@ CONTENT
       end
 
       should "write script tag with specific file in gist" do
-        assert_match "<script src='https://gist.github.com/#{@gist}.js?file=#{@filename}'><![CDATA[\s]]></script>", @result
+        assert_match "<script src=\"https://gist.github.com/#{@gist}.js?file=#{@filename}\">\s</script>", @result
       end
     end
 
@@ -397,11 +419,11 @@ CONTENT
       end
 
       should "correctly output include variable" do
-        assert_match "<span id='include-param'>value</span>", @result.strip
+        assert_match "<span id=\"include-param\">value</span>", @result.strip
       end
 
       should "ignore parameters if unused" do
-        assert_match "<hr />\n<p>Tom Preston-Werner github.com/mojombo</p>\n", @result
+        assert_match "<hr />\n<p>Tom Preston-Werner\ngithub.com/mojombo</p>\n", @result
       end
     end
 
@@ -449,7 +471,7 @@ CONTENT
       end
 
       should "not include previously used parameters" do
-        assert_match "<span id='include-param' />", @result
+        assert_match "<span id=\"include-param\"></span>", @result
       end
     end
 
@@ -466,7 +488,7 @@ CONTENT
       end
 
       should "include file with empty parameters" do
-        assert_match "<span id='include-param' />", @result
+        assert_match "<span id=\"include-param\"></span>", @result
       end
     end
 
@@ -483,7 +505,77 @@ CONTENT
       end
 
       should "include file with empty parameters within if statement" do
-        assert_match "<span id='include-param' />", @result
+        assert_match "<span id=\"include-param\"></span>", @result
+      end
+    end
+
+    context "with fenced code blocks with backticks" do
+
+      setup do
+        content = <<CONTENT
+```ruby
+puts "Hello world"
+```
+CONTENT
+        create_post(content, {
+          'markdown' => 'maruku',
+          'maruku' => {'fenced_code_blocks' => true}}
+        )
+      end
+
+      # todo: if #112 is merged into maruku, update to remove the newlines inside code block
+      should "render fenced code blocks" do
+        assert_match %r{<pre class=\"ruby\"><code class=\"ruby\">\nputs &quot;Hello world&quot;\n</code></pre>}, @result.strip
+      end
+    end
+
+    context "include missing file" do
+      setup do
+        @content = <<CONTENT
+---
+title: missing file
+---
+
+{% include missing.html %}
+CONTENT
+      end
+
+      should "raise error relative to source directory" do
+        exception = assert_raise IOError do
+          create_post(@content, {'permalink' => 'pretty', 'source' => source_dir, 'destination' => dest_dir, 'read_posts' => true})
+        end
+        assert_equal 'Included file \'_includes/missing.html\' not found', exception.message
+      end
+    end
+
+    context "include tag with variable and liquid filters" do
+      setup do
+        stub(Jekyll).configuration do
+          site_configuration({'pygments' => true})
+        end
+
+        site = Site.new(Jekyll.configuration)
+        post = Post.new(site, source_dir, '', "2013-12-17-include-variable-filters.markdown")
+        layouts = { "default" => Layout.new(site, source_dir('_layouts'), "simple.html")}
+        post.render(layouts, {"site" => {"posts" => []}})
+        @content = post.content
+      end
+
+      should "include file as variable with liquid filters" do
+        assert_match %r{1 included}, @content
+        assert_match %r{2 included}, @content
+        assert_match %r{3 included}, @content
+      end
+
+      should "include file as variable and liquid filters with arbitrary whitespace" do
+        assert_match %r{4 included}, @content
+        assert_match %r{5 included}, @content
+        assert_match %r{6 included}, @content
+      end
+
+      should "include file as variable and filters with additional parameters" do
+        assert_match '<li>var1 = foo</li>', @content
+        assert_match '<li>var2 = bar</li>', @content
       end
     end
   end

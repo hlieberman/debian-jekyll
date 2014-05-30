@@ -1,9 +1,17 @@
+require 'jekyll/convertible'
+require 'forwardable'
+
 module Jekyll
   class Excerpt
     include Convertible
+    extend Forwardable
 
     attr_accessor :post
     attr_accessor :content, :output, :ext
+
+    def_delegator :@post, :site, :site
+    def_delegator :@post, :name, :name
+    def_delegator :@post, :ext,  :ext
 
     # Initialize this Post instance.
     #
@@ -15,12 +23,6 @@ module Jekyll
     def initialize(post)
       self.post = post
       self.content = extract_excerpt(post.content)
-    end
-
-    %w[site name ext].each do |meth|
-      define_method(meth) do
-        post.send(meth)
-      end
     end
 
     def to_liquid
@@ -37,7 +39,7 @@ module Jekyll
     end
 
     # 'Path' of the excerpt.
-    # 
+    #
     # Returns the path for the post this excerpt belongs to with #excerpt appended
     def path
       File.join(post.path, "#excerpt")
@@ -45,9 +47,9 @@ module Jekyll
 
     # Check if excerpt includes a string
     #
-    # Returns true if the string passed in 
+    # Returns true if the string passed in
     def include?(something)
-      (self.output && self.output.include?(something)) || self.content.include?(something)
+      (output && output.include?(something)) || content.include?(something)
     end
 
     # The UID for this post (useful in feeds).
@@ -59,7 +61,7 @@ module Jekyll
     end
 
     def to_s
-      self.output || self.content
+      output || content
     end
 
     # Returns the shorthand String identifier of this Post.

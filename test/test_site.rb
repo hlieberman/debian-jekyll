@@ -154,9 +154,30 @@ class TestSite < Test::Unit::TestCase
       assert_equal @site.generators.sort_by(&:class).map{|g|g.class.priority}, @site.generators.map{|g|g.class.priority}
     end
 
-    should "read layouts" do
-      @site.read_layouts
-      assert_equal ["default", "simple", "post/simple"].sort, @site.layouts.keys.sort
+    should "sort pages alphabetically" do
+      stub.proxy(Dir).entries { |entries| entries.reverse }
+      @site.process
+      # files in symlinked directories may appear twice
+      sorted_pages = %w(
+        %#\ +.md
+        .htaccess
+        about.html
+        bar.html
+        coffeescript.coffee
+        contacts.html
+        deal.with.dots.html
+        exploit.md
+        foo.md
+        index.html
+        index.html
+        main.scss
+        main.scss
+        properties.html
+        sitemap.xml
+        static_files.html
+        symlinked-file
+      )
+      assert_equal sorted_pages, @site.pages.map(&:name)
     end
 
     should "read posts" do
@@ -164,6 +185,24 @@ class TestSite < Test::Unit::TestCase
       posts = Dir[source_dir('_posts', '**', '*')]
       posts.delete_if { |post| File.directory?(post) && !Post.valid?(post) }
       assert_equal posts.size - @num_invalid_posts, @site.posts.size
+    end
+
+    should "read pages with yaml front matter" do
+      abs_path = File.expand_path("about.html", @site.source)
+      assert_equal true, @site.send(:has_yaml_header?, abs_path)
+    end
+
+    should "enforce a strict 3-dash limit on the start of the YAML front-matter" do
+      abs_path = File.expand_path("pgp.key", @site.source)
+      assert_equal false, @site.send(:has_yaml_header?, abs_path)
+    end
+
+    should "expose jekyll version to site payload" do
+      assert_equal Jekyll::VERSION, @site.site_payload['jekyll']['version']
+    end
+
+    should "expose list of static files to site payload" do
+      assert_equal @site.static_files, @site.site_payload['site']['static_files']
     end
 
     should "deploy payload" do
@@ -176,7 +215,7 @@ class TestSite < Test::Unit::TestCase
 
       assert_equal posts.size - @num_invalid_posts, @site.posts.size
       assert_equal categories, @site.categories.keys.sort
-      assert_equal 4, @site.categories['foo'].size
+      assert_equal 5, @site.categories['foo'].size
     end
 
     context 'error handling' do
@@ -255,6 +294,52 @@ class TestSite < Test::Unit::TestCase
       end
     end
 
+    context 'using a non-default markdown processor in the configuration' do
+      should 'use the non-default markdown processor' do
+        class Jekyll::Converters::Markdown::CustomMarkdown
+          def initialize(*args)
+            @args = args
+          end
+
+          def convert(*args)
+            ""
+          end
+        end
+
+        custom_processor = "CustomMarkdown"
+        s = Site.new(Jekyll.configuration.merge({ 'markdown' => custom_processor }))
+        assert_nothing_raised do
+          s.process
+        end
+
+        # Do some cleanup, we don't like straggling stuff's.
+        Jekyll::Converters::Markdown.send(:remove_const, :CustomMarkdown)
+      end
+
+      should 'ignore, if there are any bad characters in the class name' do
+        module Jekyll::Converters::Markdown::Custom
+          class Markdown
+            def initialize(*args)
+              @args = args
+            end
+
+            def convert(*args)
+              ""
+            end
+          end
+        end
+
+        bad_processor = "Custom::Markdown"
+        s = Site.new(Jekyll.configuration.merge({ 'markdown' => bad_processor }))
+        assert_raise Jekyll::FatalException do
+          s.process
+        end
+
+        # Do some cleanup, we don't like straggling stuff's.
+        Jekyll::Converters::Markdown.send(:remove_const, :Custom)
+      end
+    end
+
     context 'with an invalid markdown processor in the configuration' do
       should 'not throw an error at initialization time' do
         bad_processor = 'not a processor name'
@@ -277,7 +362,7 @@ class TestSite < Test::Unit::TestCase
         site = Site.new(Jekyll.configuration)
         site.process
 
-        file_content = YAML.safe_load_file(File.join(source_dir, '_data', 'members.yaml'))
+        file_content = SafeYAML.load_file(File.join(source_dir, '_data', 'members.yaml'))
 
         assert_equal site.data['members'], file_content
         assert_equal site.site_payload['site']['data']['members'], file_content
@@ -287,7 +372,7 @@ class TestSite < Test::Unit::TestCase
         site = Site.new(Jekyll.configuration)
         site.process
 
-        file_content = YAML.safe_load_file(File.join(source_dir, '_data', 'languages.yml'))
+        file_content = SafeYAML.load_file(File.join(source_dir, '_data', 'languages.yml'))
 
         assert_equal site.data['languages'], file_content
         assert_equal site.site_payload['site']['data']['languages'], file_content
@@ -297,7 +382,7 @@ class TestSite < Test::Unit::TestCase
         site = Site.new(Jekyll.configuration.merge({'safe' => false}))
         site.process
 
-        file_content = YAML.safe_load_file(File.join(source_dir, '_data', 'products.yml'))
+        file_content = SafeYAML.load_file(File.join(source_dir, '_data', 'products.yml'))
 
         assert_equal site.data['products'], file_content
         assert_equal site.site_payload['site']['data']['products'], file_content
@@ -311,23 +396,6 @@ class TestSite < Test::Unit::TestCase
         assert_nil site.site_payload['site']['data']['products']
       end
 
-      should "load symlink directory in unsafe mode" do
-        site = Site.new(Jekyll.configuration.merge({'safe' => false, 'data_source' => File.join('symlink-test', '_data')}))
-        site.process
-
-        assert_not_nil site.data['products']
-        assert_not_nil site.data['languages']
-        assert_not_nil site.data['members']
-      end
-
-      should "not load symlink directory in safe mode" do
-        site = Site.new(Jekyll.configuration.merge({'safe' => true, 'data_source' => File.join('symlink-test', '_data')}))
-        site.process
-
-        assert_nil site.data['products']
-        assert_nil site.data['languages']
-        assert_nil site.data['members']
-      end
     end
   end
 end

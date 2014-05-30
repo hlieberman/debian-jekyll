@@ -25,162 +25,205 @@ common tasks easier.
   <tbody>
     <tr>
       <td>
-        <p class='name'><strong>Date to XML Schema</strong></p>
+        <p class="name"><strong>Date to XML Schema</strong></p>
         <p>Convert a Date into XML Schema (ISO 8601) format.</p>
       </td>
-      <td class='align-center'>
+      <td class="align-center">
         <p>
-         <code class='filter'>{% raw %}{{ site.time | date_to_xmlschema }}{% endraw %}</code>
+         <code class="filter">{% raw %}{{ site.time | date_to_xmlschema }}{% endraw %}</code>
         </p>
         <p>
-          <code class='output'>2008-11-07T13:07:54-08:00</code>
+          <code class="output">2008-11-07T13:07:54-08:00</code>
         </p>
       </td>
     </tr>
     <tr>
       <td>
-        <p class='name'><strong>Date to RFC-822 Format</strong></p>
+        <p class="name"><strong>Date to RFC-822 Format</strong></p>
         <p>Convert a Date into the RFC-822 format used for RSS feeds.</p>
       </td>
-      <td class='align-center'>
+      <td class="align-center">
         <p>
-         <code class='filter'>{% raw %}{{ site.time | date_to_rfc822 }}{% endraw %}</code>
+         <code class="filter">{% raw %}{{ site.time | date_to_rfc822 }}{% endraw %}</code>
         </p>
         <p>
-          <code class='output'>Mon, 07 Nov 2008 13:07:54 -0800</code>
+          <code class="output">Mon, 07 Nov 2008 13:07:54 -0800</code>
         </p>
       </td>
     </tr>
     <tr>
       <td>
-        <p class='name'><strong>Date to String</strong></p>
+        <p class="name"><strong>Date to String</strong></p>
         <p>Convert a date to short format.</p>
       </td>
-      <td class='align-center'>
+      <td class="align-center">
         <p>
-         <code class='filter'>{% raw %}{{ site.time | date_to_string }}{% endraw %}</code>
+         <code class="filter">{% raw %}{{ site.time | date_to_string }}{% endraw %}</code>
         </p>
         <p>
-          <code class='output'>07 Nov 2008</code>
+          <code class="output">07 Nov 2008</code>
         </p>
       </td>
     </tr>
     <tr>
       <td>
-        <p class='name'><strong>Date to Long String</strong></p>
+        <p class="name"><strong>Date to Long String</strong></p>
         <p>Format a date to long format.</p>
       </td>
-      <td class='align-center'>
+      <td class="align-center">
         <p>
-         <code class='filter'>{% raw %}{{ site.time | date_to_long_string }}{% endraw %}</code>
+         <code class="filter">{% raw %}{{ site.time | date_to_long_string }}{% endraw %}</code>
         </p>
         <p>
-          <code class='output'>07 November 2008</code>
+          <code class="output">07 November 2008</code>
         </p>
       </td>
     </tr>
     <tr>
       <td>
-        <p class='name'><strong>XML Escape</strong></p>
+        <p class="name"><strong>Where</strong></p>
+        <p>Select all the objects in an array where the key has the given value.</p>
+      </td>
+      <td class="align-center">
+        <p>
+         <code class="filter">{% raw %}{{ site.members | where:"graduation_year","2014" }}{% endraw %}</code>
+        </p>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <p class="name"><strong>Group By</strong></p>
+        <p>Group an array's items by a given property.</p>
+      </td>
+      <td class="align-center">
+        <p>
+         <code class="filter">{% raw %}{{ site.members | group_by:"graduation_year" }}{% endraw %}</code>
+        </p>
+        <p>
+          <code class="output">[{"name"=>"2013", "items"=>[...]},
+{"name"=>"2014", "items"=>[...]}]</code>
+        </p>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <p class="name"><strong>XML Escape</strong></p>
         <p>Escape some text for use in XML.</p>
       </td>
-      <td class='align-center'>
+      <td class="align-center">
         <p>
-         <code class='filter'>{% raw %}{{ page.content | xml_escape }}{% endraw %}</code>
+         <code class="filter">{% raw %}{{ page.content | xml_escape }}{% endraw %}</code>
         </p>
       </td>
     </tr>
     <tr>
       <td>
-        <p class='name'><strong>CGI Escape</strong></p>
+        <p class="name"><strong>CGI Escape</strong></p>
         <p>
           CGI escape a string for use in a URL. Replaces any special characters
           with appropriate %XX replacements.
         </p>
       </td>
-      <td class='align-center'>
+      <td class="align-center">
         <p>
-         <code class='filter'>{% raw %}{{ “foo,bar;baz?” | cgi_escape }}{% endraw %}</code>
+         <code class="filter">{% raw %}{{ “foo,bar;baz?” | cgi_escape }}{% endraw %}</code>
         </p>
         <p>
-          <code class='output'>foo%2Cbar%3Bbaz%3F</code>
+          <code class="output">foo%2Cbar%3Bbaz%3F</code>
         </p>
       </td>
     </tr>
     <tr>
       <td>
-        <p class='name'><strong>URI Escape</strong></p>
+        <p class="name"><strong>URI Escape</strong></p>
         <p>
           URI escape a string.
         </p>
       </td>
-      <td class='align-center'>
+      <td class="align-center">
         <p>
-         <code class='filter'>{% raw %}{{ “'foo, bar \\baz?'” | uri_escape }}{% endraw %}</code>
+         <code class="filter">{% raw %}{{ “'foo, bar \\baz?'” | uri_escape }}{% endraw %}</code>
         </p>
         <p>
-          <code class='output'>foo,%20bar%20%5Cbaz?</code>
+          <code class="output">foo,%20bar%20%5Cbaz?</code>
         </p>
       </td>
     </tr>
     <tr>
       <td>
-        <p class='name'><strong>Number of Words</strong></p>
+        <p class="name"><strong>Number of Words</strong></p>
         <p>Count the number of words in some text.</p>
       </td>
-      <td class='align-center'>
+      <td class="align-center">
         <p>
-         <code class='filter'>{% raw %}{{ page.content | number_of_words }}{% endraw %}</code>
+         <code class="filter">{% raw %}{{ page.content | number_of_words }}{% endraw %}</code>
         </p>
         <p>
-          <code class='output'>1337</code>
+          <code class="output">1337</code>
         </p>
       </td>
     </tr>
     <tr>
       <td>
-        <p class='name'><strong>Array to Sentence</strong></p>
+        <p class="name"><strong>Array to Sentence</strong></p>
         <p>Convert an array into a sentence. Useful for listing tags.</p>
       </td>
-      <td class='align-center'>
+      <td class="align-center">
         <p>
-         <code class='filter'>{% raw %}{{ page.tags | array_to_sentence_string }}{% endraw %}</code>
+         <code class="filter">{% raw %}{{ page.tags | array_to_sentence_string }}{% endraw %}</code>
         </p>
         <p>
-          <code class='output'>foo, bar, and baz</code>
+          <code class="output">foo, bar, and baz</code>
         </p>
       </td>
     </tr>
     <tr>
       <td>
-        <p class='name'><strong>Textilize</strong></p>
+        <p class="name"><strong>Textilize</strong></p>
         <p>Convert a Textile-formatted string into HTML, formatted via RedCloth</p>
       </td>
-      <td class='align-center'>
+      <td class="align-center">
         <p>
-         <code class='filter'>{% raw %}{{ page.excerpt | textilize }}{% endraw %}</code>
+         <code class="filter">{% raw %}{{ page.excerpt | textilize }}{% endraw %}</code>
         </p>
       </td>
     </tr>
     <tr>
       <td>
-        <p class='name'><strong>Markdownify</strong></p>
+        <p class="name"><strong>Markdownify</strong></p>
         <p>Convert a Markdown-formatted string into HTML.</p>
       </td>
-      <td class='align-center'>
+      <td class="align-center">
         <p>
-         <code class='filter'>{% raw %}{{ page.excerpt | markdownify }}{% endraw %}</code>
+         <code class="filter">{% raw %}{{ page.excerpt | markdownify }}{% endraw %}</code>
         </p>
       </td>
     </tr>
     <tr>
       <td>
-        <p class='name'><strong>Data To JSON</strong></p>
+        <p class="name"><strong>Data To JSON</strong></p>
         <p>Convert Hash or Array to JSON.</p>
       </td>
-      <td class='align-center'>
+      <td class="align-center">
         <p>
-         <code class='filter'>{% raw %}{{ site.data.projects | jsonify }}{% endraw %}</code>
+         <code class="filter">{% raw %}{{ site.data.projects | jsonify }}{% endraw %}</code>
+        </p>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <p class="name"><strong>Sort</strong></p>
+        <p>Sort an array. Optional arguments for hashes: 1.&nbsp;property name 2.&nbsp;nils order (<em>first</em> or <em>last</em>).</p>
+      </td>
+      <td class="align-center">
+        <p>
+         <code class="filter">{% raw %}{{ page.tags | sort }}{% endraw %}</code>
+        </p>
+        <p>
+         <code class="filter">{% raw %}{{ site.posts | sort: 'author' }}{% endraw %}</code>
+        </p>
+        <p>
+         <code class="filter">{% raw %}{{ site.pages | sort: 'title', 'last' }}{% endraw %}</code>
         </p>
       </td>
     </tr>
@@ -211,8 +254,6 @@ root of your source directory. This will embed the contents of
     or you can use a variable, using liquid-like variable syntax as in
     <code>{% raw %}{% include {{my_variable}} %}{% endraw %}</code>.
 
-    Note that unlike usual liquid variable syntax, you cannot have spaces inside the curly braces.
-
   </p>
 </div>
 
@@ -232,8 +273,14 @@ These parameters are available via Liquid in the include:
 
 Jekyll has built in support for syntax highlighting of [over 100
 languages](http://pygments.org/languages/) thanks to
-[Pygments](http://pygments.org/). To use Pygments, you must have Python installed on your
-system and set `pygments` to `true` in your site's configuration file.
+[Pygments](http://pygments.org/). To use Pygments, you must have Python installed
+on your system and set `highlighter` to `pygments` in your site's configuration
+file.
+
+Alternatively, you can use [Rouge](https://github.com/jayferd/rouge) to highlight
+your code snippets. It doesn't support as many languages as Pygments does but
+it should fit in most cases and it's written in pure Ruby ; you don't need Python
+on your system!
 
 To render a code block with syntax highlighting, surround your code as follows:
 
@@ -249,8 +296,9 @@ end
 
 The argument to the `highlight` tag (`ruby` in the example above) is the
 language identifier. To find the appropriate identifier to use for the language
-you want to highlight, look for the “short name” on the [Lexers
-page](http://pygments.org/docs/lexers/).
+you want to highlight, look for the “short name” on the [Pygments' Lexers
+page](http://pygments.org/docs/lexers/) or the [Rouge
+wiki](https://github.com/jayferd/rouge/wiki/List-of-supported-languages-and-lexers).
 
 #### Line numbers
 
@@ -290,7 +338,7 @@ will generate the correct permalink URL for the post you specify.
 {% endraw %}
 {% endhighlight %}
 
-If you organize your posts in subdirectories, you need to include subdirectory 
+If you organize your posts in subdirectories, you need to include subdirectory
 path to the post:
 
 {% highlight text %}
@@ -311,24 +359,7 @@ You can also use this tag to create a link to a post in Markdown as follows:
 
 ### Gist
 
-Use the `gist` tag to easily embed a GitHub Gist onto your site:
-
-{% highlight text %}
-{% raw %}
-{% gist 5555251 %}
-{% endraw %}
-{% endhighlight %}
-
-You may also optionally specify the filename in the gist to display:
-
-{% highlight text %}
-{% raw %}
-{% gist 5555251 result.md %}
-{% endraw %}
-{% endhighlight %}
-
-The `gist` tag also works with private gists, which require the gist owner's
-github username:
+Use the `gist` tag to easily embed a GitHub Gist onto your site. This works with public or secret gists:
 
 {% highlight text %}
 {% raw %}
@@ -336,4 +367,10 @@ github username:
 {% endraw %}
 {% endhighlight %}
 
-The private gist syntax also supports filenames.
+You may also optionally specify the filename in the gist to display:
+
+{% highlight text %}
+{% raw %}
+{% gist parkr/931c1c8d465a04042403 jekyll-private-gist.markdown %}
+{% endraw %}
+{% endhighlight %}

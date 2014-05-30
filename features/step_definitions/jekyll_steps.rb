@@ -1,13 +1,35 @@
+def file_content_from_hash(input_hash)
+  matter_hash = input_hash.reject { |k, v| k == "content" }
+  matter = matter_hash.map { |k, v| "#{k}: #{v}\n" }.join.chomp
+
+  content = if input_hash['input'] && input_hash['filter']
+    "{{ #{input_hash['input']} | #{input_hash['filter']} }}"
+  else
+    input_hash['content']
+  end
+
+  <<EOF
+---
+#{matter}
+---
+#{content}
+EOF
+end
+
 Before do
-  FileUtils.rm_rf(TEST_DIR)
-  FileUtils.mkdir(TEST_DIR)
+  FileUtils.mkdir_p(TEST_DIR) unless File.exist?(TEST_DIR)
   Dir.chdir(TEST_DIR)
+end
+
+After do
+  FileUtils.rm_rf(TEST_DIR)   if File.exists?(TEST_DIR)
+  FileUtils.rm(JEKYLL_COMMAND_OUTPUT_FILE) if File.exists?(JEKYLL_COMMAND_OUTPUT_FILE)
 end
 
 World(Test::Unit::Assertions)
 
 Given /^I have a blank site in "(.*)"$/ do |path|
-  FileUtils.mkdir_p(path)
+  FileUtils.mkdir_p(path) unless File.exist?(path)
 end
 
 Given /^I do not have a "(.*)" directory$/ do |path|
@@ -58,42 +80,28 @@ Given /^I have an? (.*) directory$/ do |dir|
   FileUtils.mkdir_p(dir)
 end
 
-Given /^I have the following (draft|post)s?(?: (in|under) "([^"]+)")?:$/ do |status, direction, folder, table|
-  table.hashes.each do |post|
-    title = slug(post['title'])
-    ext = post['type'] || 'textile'
+Given /^I have the following (draft|page|post)s?(?: (in|under) "([^"]+)")?:$/ do |status, direction, folder, table|
+  table.hashes.each do |input_hash|
+    title = slug(input_hash['title'])
+    ext = input_hash['type'] || 'textile'
     before, after = location(folder, direction)
 
-    if "draft" == status
-      folder_post = '_drafts'
+    case status
+    when "draft"
+      dest_folder = '_drafts'
       filename = "#{title}.#{ext}"
-    elsif "post" == status
-      parsed_date = Time.xmlschema(post['date']) rescue Time.parse(post['date'])
-      folder_post = '_posts'
+    when "page"
+      dest_folder = ''
+      filename = "#{title}.#{ext}"
+    when "post"
+      parsed_date = Time.xmlschema(input_hash['date']) rescue Time.parse(input_hash['date'])
+      dest_folder = '_posts'
       filename = "#{parsed_date.strftime('%Y-%m-%d')}-#{title}.#{ext}"
     end
 
-    path = File.join(before, folder_post, after, filename)
-
-    matter_hash = {}
-    %w(title layout tag tags category categories published author path date permalink).each do |key|
-      matter_hash[key] = post[key] if post[key]
-    end
-    matter = matter_hash.map { |k, v| "#{k}: #{v}\n" }.join.chomp
-
-    content = if post['input'] && post['filter']
-      "{{ #{post['input']} | #{post['filter']} }}"
-    else
-      post['content']
-    end
-
+    path = File.join(before, dest_folder, after, filename)
     File.open(path, 'w') do |f|
-      f.write <<EOF
----
-#{matter}
----
-#{content}
-EOF
+      f.write file_content_from_hash(input_hash)
     end
   end
 end
@@ -121,21 +129,21 @@ Given /^I have a configuration file with "([^\"]*)" set to:$/ do |key, table|
   end
 end
 
-
-When /^I run jekyll$/ do
-  run_jekyll
+Given /^I have fixture collections$/ do
+  FileUtils.cp_r File.join(JEKYLL_SOURCE_DIR, "test", "source", "_methods"), source_dir
 end
 
-When /^I run jekyll with drafts$/ do
-  run_jekyll(:drafts => true)
-end
+##################
+#
+# Changing stuff
+#
+##################
 
-When /^I call jekyll new with test_blank --blank$/ do
-  call_jekyll_new(:path => "test_blank", :blank => true)
-end
-
-When /^I debug jekyll$/ do
-  run_jekyll(:debug => true)
+When /^I run jekyll(.*)$/ do |args|
+  status = run_jekyll(args)
+  if !status || args.include?("--verbose")
+    puts jekyll_run_output
+  end
 end
 
 When /^I change "(.*)" to contain "(.*)"$/ do |file, text|
@@ -157,7 +165,7 @@ Then /^the (.*) directory should not exist$/ do |dir|
 end
 
 Then /^I should see "(.*)" in "(.*)"$/ do |text, file|
-  assert_match Regexp.new(text), file_contents(file)
+  assert_match Regexp.new(text, Regexp::MULTILINE), file_contents(file)
 end
 
 Then /^I should see exactly "(.*)" in "(.*)"$/ do |text, file|
@@ -165,7 +173,7 @@ Then /^I should see exactly "(.*)" in "(.*)"$/ do |text, file|
 end
 
 Then /^I should not see "(.*)" in "(.*)"$/ do |text, file|
-  assert_no_match Regexp.new(text), file_contents(file)
+  assert_no_match Regexp.new(text, Regexp::MULTILINE), file_contents(file)
 end
 
 Then /^I should see escaped "(.*)" in "(.*)"$/ do |text, file|
@@ -177,7 +185,7 @@ Then /^the "(.*)" file should +exist$/ do |file|
 end
 
 Then /^the "(.*)" file should not exist$/ do |file|
-  assert !File.exists?(file), "The file \"#{file}\" exists"
+  assert !File.exist?(file), "The file \"#{file}\" exists"
 end
 
 Then /^I should see today's time in "(.*)"$/ do |file|

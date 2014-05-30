@@ -25,6 +25,34 @@ class TestPost < Test::Unit::TestCase
       assert !Post.valid?("blah")
     end
 
+    should "make properties accessible through #[]" do
+      post = setup_post('2013-12-20-properties.text')
+
+      attrs = {
+        categories: %w(foo bar baz),
+        content: "All the properties.\n\nPlus an excerpt.\n",
+        date: Time.new(2013, 12, 20),
+        dir: "/foo/bar/baz/2013/12/20",
+        excerpt: "All the properties.\n\n",
+        foo: 'bar',
+        id: "/foo/bar/baz/2013/12/20/properties",
+        layout: 'default',
+        name: nil,
+        path: "_posts/2013-12-20-properties.text",
+        permalink: nil,
+        published: nil,
+        tags: %w(ay bee cee),
+        title: 'Properties Post',
+        url: "/foo/bar/baz/2013/12/20/properties.html"
+      }
+
+      attrs.each do |attr, val|
+        attr_str = attr.to_s
+        result = post[attr_str]
+        assert_equal val, result, "For <post[\"#{attr_str}\"]>:"
+      end
+    end
+
     context "processing posts" do
       setup do
         @post = Post.allocate
@@ -58,11 +86,18 @@ class TestPost < Test::Unit::TestCase
         end
       end
 
-      should "CGI escape urls" do
+      should "escape urls" do
         @post.categories = []
         @post.process("2009-03-12-hash-#1.markdown")
         assert_equal "/2009/03/12/hash-%231.html", @post.url
         assert_equal "/2009/03/12/hash-#1", @post.id
+      end
+
+      should "escape urls with non-alphabetic characters" do
+        @post.categories = []
+        @post.process("2014-03-22-escape-+ %20[].markdown")
+        assert_equal "/2014/03/22/escape-+%20%2520%5B%5D.html", @post.url
+        assert_equal "/2014/03/22/escape-+ %20[]", @post.id
       end
 
       should "respect permalink in yaml front matter" do
@@ -96,6 +131,18 @@ class TestPost < Test::Unit::TestCase
 
           assert_equal({"title" => "Test title", "layout" => "post", "tag" => "Ruby"}, @post.data)
           assert_equal "This is the content", @post.content
+        end
+      end
+
+      context "with three dots ending YAML header" do
+        setup do
+          @real_file = "2014-03-03-yaml-with-dots.md"
+        end
+        should "should read the YAML header" do
+          @post.read_yaml(@source, @real_file)
+
+          assert_equal({"title" => "Test Post Where YAML Ends in Dots"},
+                       @post.data)
         end
       end
 
@@ -295,7 +342,7 @@ class TestPost < Test::Unit::TestCase
         end
 
         should "return rendered HTML" do
-          assert_equal "<p>First paragraph with <a href=\"http://www.jekyllrb.com/\">link ref</a>.</p>",
+          assert_equal "<p>First paragraph with <a href=\"http://www.jekyllrb.com/\">link ref</a>.</p>\n\n",
                        @post.excerpt
         end
 
@@ -368,16 +415,6 @@ class TestPost < Test::Unit::TestCase
     end
 
     context "initializing posts" do
-      should "publish when published yaml is no specified" do
-        post = setup_post("2008-02-02-published.textile")
-        assert_equal true, post.published
-      end
-
-      should "not published when published yaml is false" do
-        post = setup_post("2008-02-02-not-published.textile")
-        assert_equal false, post.published
-      end
-
       should "recognize date in yaml" do
         post = setup_post("2010-01-09-date-override.textile")
         do_render(post)
@@ -490,7 +527,27 @@ class TestPost < Test::Unit::TestCase
           post.write(dest_dir)
 
           assert File.directory?(dest_dir)
-          assert File.exists?(File.join(dest_dir, '2008', '10', '18', 'foo-bar.html'))
+          assert File.exist?(File.join(dest_dir, '2008', '10', '18', 'foo-bar.html'))
+        end
+
+        should "write properly when url has hash" do
+          post = setup_post("2009-03-12-hash-#1.markdown")
+          do_render(post)
+          post.write(dest_dir)
+
+          assert File.directory?(dest_dir)
+          assert File.exist?(File.join(dest_dir, '2009', '03', '12',
+                                        'hash-#1.html'))
+        end
+
+        should "write properly when url has space" do
+          post = setup_post("2014-03-22-escape-+ %20[].markdown")
+          do_render(post)
+          post.write(dest_dir)
+
+          assert File.directory?(dest_dir)
+          assert File.exist?(File.join(dest_dir, '2014', '03', '22',
+                                        'escape-+ %20[].html'))
         end
 
         should "write properly without html extension" do
@@ -500,7 +557,7 @@ class TestPost < Test::Unit::TestCase
           post.write(dest_dir)
 
           assert File.directory?(dest_dir)
-          assert File.exists?(File.join(dest_dir, 'foo-bar', 'index.html'))
+          assert File.exist?(File.join(dest_dir, 'foo-bar', 'index.html'))
         end
 
         should "insert data" do
@@ -515,7 +572,7 @@ class TestPost < Test::Unit::TestCase
           post.site.source = File.join(File.dirname(__FILE__), 'source')
           do_render(post)
 
-          assert_equal "<<< <hr />\n<p>Tom Preston-Werner github.com/mojombo</p>\n\n<p>This <em>is</em> cool</p> >>>", post.output
+          assert_equal "<<< <hr />\n<p>Tom Preston-Werner\ngithub.com/mojombo</p>\n\n<p>This <em>is</em> cool</p>\n >>>", post.output
         end
 
         should "render date specified in front matter properly" do

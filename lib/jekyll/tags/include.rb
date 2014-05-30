@@ -14,12 +14,19 @@ module Jekyll
       SYNTAX_EXAMPLE = "{% include file.ext param='value' param2='value' %}"
 
       VALID_SYNTAX = /([\w-]+)\s*=\s*(?:"([^"\\]*(?:\\.[^"\\]*)*)"|'([^'\\]*(?:\\.[^'\\]*)*)'|([\w\.-]+))/
+      VARIABLE_SYNTAX = /(?<variable>\{\{\s*(?<name>[\w\-\.]+)\s*(\|.*)?\}\})(?<params>.*)/
 
       INCLUDES_DIR = '_includes'
 
       def initialize(tag_name, markup, tokens)
         super
-        @file, @params = markup.strip.split(' ', 2);
+        matched = markup.strip.match(VARIABLE_SYNTAX)
+        if matched
+          @file = matched['variable'].strip
+          @params = matched['params'].strip
+        else
+          @file, @params = markup.strip.split(' ', 2);
+        end
         validate_params if @params
       end
 
@@ -48,11 +55,11 @@ module Jekyll
             raise ArgumentError.new <<-eos
 Invalid syntax for include tag. File contains invalid characters or sequences:
 
-	#{@file}
+  #{file}
 
 Valid syntax:
 
-	#{SYNTAX_EXAMPLE}
+  #{SYNTAX_EXAMPLE}
 
 eos
         end
@@ -64,11 +71,11 @@ eos
           raise ArgumentError.new <<-eos
 Invalid syntax for include tag:
 
-	#{@params}
+  #{@params}
 
 Valid syntax:
 
-	#{SYNTAX_EXAMPLE}
+  #{SYNTAX_EXAMPLE}
 
 eos
         end
@@ -79,17 +86,18 @@ eos
         context.registers[:site].file_read_opts
       end
 
-      def retrieve_variable(context)
-        if /\{\{([\w\-\.]+)\}\}/ =~ @file
-          raise ArgumentError.new("No variable #{$1} was found in include tag") if context[$1].nil?
-          context[$1]
+      # Render the variable if required
+      def render_variable(context)
+        if @file.match(VARIABLE_SYNTAX)
+          partial = Liquid::Template.parse(@file)
+          partial.render!(context)
         end
       end
 
       def render(context)
         dir = File.join(File.realpath(context.registers[:site].source), INCLUDES_DIR)
 
-        file = retrieve_variable(context) || @file
+        file = render_variable(context) || @file
         validate_file_name(file)
 
         path = File.join(dir, file)
@@ -111,8 +119,12 @@ eos
         if safe && !realpath_prefixed_with?(path, dir)
           raise IOError.new "The included file '#{path}' should exist and should not be a symlink"
         elsif !File.exist?(path)
-          raise IOError.new "Included file '#{path}' not found"
+          raise IOError.new "Included file '#{path_relative_to_source(dir, path)}' not found"
         end
+      end
+
+      def path_relative_to_source(dir, path)
+        File.join(INCLUDES_DIR, path.sub(Regexp.new("^#{dir}"), ""))
       end
 
       def realpath_prefixed_with?(path, dir)
@@ -125,7 +137,7 @@ eos
 
       # This method allows to modify the file content by inheriting from the class.
       def source(file, context)
-        File.read_with_options(file, file_read_opts(context))
+        File.read(file, file_read_opts(context))
       end
     end
   end

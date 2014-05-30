@@ -83,7 +83,7 @@ module Jekyll
     #
     # Returns the escaped String.
     def xml_escape(input)
-      CGI.escapeHTML(input)
+      CGI.escapeHTML(input.to_s)
     end
 
     # CGI escape a string for use in a URL. Replaces any special characters
@@ -100,7 +100,7 @@ module Jekyll
     def cgi_escape(input)
       CGI::escape(input)
     end
-    
+
     # URI escape a string.
     #
     # input - The String to escape.
@@ -124,7 +124,7 @@ module Jekyll
       input.split.length
     end
 
-    # Join an array of things into a string by separating with commes and the
+    # Join an array of things into a string by separating with commas and the
     # word "and" for the last one.
     #
     # array - The Array of Strings to join.
@@ -158,16 +158,96 @@ module Jekyll
       input.to_json
     end
 
+    # Group an array of items by a property
+    #
+    # input - the inputted Enumerable
+    # property - the property
+    #
+    # Returns an array of Hashes, each looking something like this:
+    #  {"name"  => "larry"
+    #   "items" => [...] } # all the items where `property` == "larry"
+    def group_by(input, property)
+      if groupable?(input)
+        input.group_by do |item|
+          item_property(item, property).to_s
+        end.inject([]) do |memo, i|
+          memo << {"name" => i.first, "items" => i.last}
+        end
+      else
+        input
+      end
+    end
+
+    # Filter an array of objects
+    #
+    # input - the object array
+    # key - key within each object to filter by
+    # value - desired value
+    #
+    # Returns the filtered array of objects
+    def where(input, property, value)
+      return input unless input.is_a?(Array)
+      input.select { |object| item_property(object, property) == value }
+    end
+
+    # Sort an array of objects
+    #
+    # input - the object array
+    # key - key within each object to filter by
+    # nils ('first' | 'last') - nils appear before or after non-nil values
+    #
+    # Returns the filtered array of objects
+    def sort(input, key = nil, nils = "first")
+      if key.nil?
+        input.sort
+      else
+        case
+        when nils == "first"
+          order = - 1
+        when nils == "last"
+          order = + 1
+        else
+          Jekyll.logger.error "Invalid nils order:",
+            "'#{nils}' is not a valid nils order. It must be 'first' or 'last'."
+          exit(1)
+        end
+
+        input.sort { |a, b|
+          if !a[key].nil? && b[key].nil?
+            - order
+          elsif a[key].nil? && !b[key].nil?
+            + order
+          else
+            a[key] <=> b[key]
+          end
+        }
+      end
+    end
+
     private
     def time(input)
       case input
       when Time
         input
       when String
-        Time.parse(input)
+        Time.parse(input) rescue Time.at(input.to_i)
+      when Number
+        Time.at(input)
       else
         Jekyll.logger.error "Invalid Date:", "'#{input}' is not a valid datetime."
         exit(1)
+      end
+    end
+
+    def groupable?(element)
+      element.respond_to?(:group_by)
+    end
+
+    def item_property(item, property)
+      if item.respond_to?(:data)
+        item.data[property.to_s]
+      else
+        item[property.to_s]
       end
     end
   end
